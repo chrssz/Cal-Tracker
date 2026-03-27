@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="manifest" href="/manifest.webmanifest"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cal Tracker</title>
+    <link rel="stylesheet" href="/src/style.css">
+  </head>
+  <body>
+    <section id="main">
+
+      <section id="app-name">
+        <h1>Cal Tracker</h1>
+        <p id="date">March 26th, 2026</p>
+      </section>
+
+      <section id="calorie-section">
+        <h2>Overview</h2>
+        <div id = "calories-display">
+          <span id= "calories-consumed">Calories: 0</span>  /
+          <span id= "calories-goal">2000</span>
+        </div>
+
+        <div id= "progress-bar-container">
+          <div id= "progress-bar"></div>
+        </div>
+      </section>
+
+      <section id="macro-section">
+        <div class = "macros-display">
+          <!--Fats-->
+          <div class="macro">
+            <span class="macro-label">Fats:</span>
+            <span class="macro-value" id = "fat-consumed">0</span> /
+            <span class="macro-goal" id="fat-goal">50</span>
+          </div>
+          <div class ="macro-bar-container">
+            <div class="macro-bar" id="fat-bar"></div>
+          </div>
+           <!--Carbs-->
+          <div class="macro">
+            <span class="macro-label">Carbs:</span>
+            <span class="macro-value" id = "carb-consumed">0</span> /
+            <span class="macro-goal" id="carb-goal">50</span>
+          </div>
+          <div class ="macro-bar-container">
+            <div class="macro-bar" id="carb-bar"></div>
+          </div>
+           <!--Protein-->
+          <div class="macro">
+            <span class="macro-label">Protein:</span>
+            <span class="macro-value" id = "protein-consumed">0</span> /
+            <span class="macro-goal" id="fat-goal">50</span>
+          </div>
+          <div class ="macro-bar-container">
+            <div class="macro-bar" id="protein-bar"></div>
+          </div>
+
+        </div>
+      </section>
+      
+    </section>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
