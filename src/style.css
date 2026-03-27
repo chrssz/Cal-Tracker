@@ -1,0 +1,95 @@
+/* Global Vars */
+:root
+{
+  --body-bg-color: #f4f1f19e;
+  --main-bg-color: white;
+}
+
+
+/**/
+body{
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--body-bg-color);
+  margin: auto 0;
+  padding: 16px;
+}
+
+#app-name{
+  text-align: center;
+}
+#app-name h1
+{
+  font-size: 2.3rem;
+}
+/* Sections */
+#main{
+  background: var(--main-bg-color);
+  position: relative;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.18);
+  margin-bottom: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+#add-meal-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  
+  width: 100%;
+  height: 100%;
+  background-color: var(--main-bg-color);
+  
+  z-index: 999;
+  
+}
+#macro-meal{
+  flex-direction: row;
+}
+#meal-summary-overlay{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: var(--body-bg-color);
+  box-shadow: 0.5px 0px 4px rgb(136, 135, 135);
+  z-index: 1000;
+  gap: 2px
+}
+#buttons {
+  display: flex;
+  justify-content: center;  
+  
+}
+#meal-macro-summary{
+  display: flex;
+  flex-direction: flex-end;
+  gap: 5px;
+}
+/* ClassStyles */
+.user-input{
+  border: 2px solid rgb(84, 83, 83);
+  border-radius: 2.5%;
+  font-weight: 100;
+}
+.meal-overlay-btn{
+  border: 0.2px solid rgb(255, 251, 251);
+  border-radius: 15%;
+  font-weight: 100;
+}
+/* Progress Bars */
+
+/* Hidden */
+#add-meal-container.hidden{
+  display: none;  
+}
+
+#meal-summary-overlay.hidden{
+  display: none;
+}
