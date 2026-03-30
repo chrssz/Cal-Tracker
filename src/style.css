@@ -3,6 +3,9 @@
 {
   --body-bg-color: #f4f1f19e;
   --main-bg-color: white;
+  --font-weight: 2.5rem;
+  --info-color: #9c9c9c;
+
 }
 
 
@@ -12,6 +15,7 @@ body{
   background: var(--body-bg-color);
   margin: auto 0;
   padding: 16px;
+  
 }
 
 #app-name{
@@ -62,7 +66,7 @@ body{
   z-index: 1000;
   gap: 2px
 }
-#buttons {
+#meal-buttons {
   display: flex;
   justify-content: center;  
   
@@ -72,16 +76,56 @@ body{
   flex-direction: flex-end;
   gap: 5px;
 }
+#food-list-container{
+  position: absolute;
+  background-color: red;
+  top: 0;
+  left: 0;
+}
+#options-button {
+  position: absolute;
+  left: 0;
+  top:0;
+  z-index: 1000;
+}
+#options-window{
+  position: absolute;
+  display:flex;
+  left: 0;
+  top: 0;
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  background-color: var(--main-bg-color);
+  box-shadow: 0.5px 0px 4px rgb(136, 135, 135);
+  justify-content: center;
+  flex-direction: column;
+  font-weight: var(--font-weight);
+}
 /* ClassStyles */
 .user-input{
   border: 2px solid rgb(84, 83, 83);
   border-radius: 2.5%;
-  font-weight: 100;
+  font-weight:var(--font-weight);
 }
-.meal-overlay-btn{
+.overlay-btn{
   border: 0.2px solid rgb(255, 251, 251);
   border-radius: 15%;
-  font-weight: 100;
+  font-weight: var(--font-weight);
+}
+.set-row{
+  display: flex;
+  align-content: center;
+  border-bottom: 2px solid #796f6f;
+  justify-content: space-between;
+  padding: 13px 1px;
+}
+.set-info{
+  color: var(--info-color);
+}
+.set-input{
+  width: 2.5rem;
+  
 }
 /* Progress Bars */
 
@@ -92,4 +136,11 @@ body{
 
 #meal-summary-overlay.hidden{
   display: none;
+}
+#food-list-container.hidden{
+  display: none;
+}
+
+#options-window.hidden{
+  display:none;
 }
