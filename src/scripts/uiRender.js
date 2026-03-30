@@ -1,8 +1,9 @@
-
+import { renderBars } from "./progress";
 //Will render all components in document
 function renderAll()
 {
     renderDate();
+    renderBars();
 }
 
 function renderDate()

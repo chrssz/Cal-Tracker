@@ -13,19 +13,19 @@
 
       <section id="app-name">
         <h1>Cal Tracker</h1>
-        <p id="date">March 29th, 2026</p>
+        <p id="date"></p>
       </section>
 
       <!--Calories-->
       <section id="calorie-section">
         <h2>Overview</h2>
         <div id = "calories-display">
-          <span id= "calories-consumed">Calories: 0</span>  /
+          Calories: <span id="calories-consumed">0</span>  /
           <span id= "calories-goal">2000</span>
         </div>
-
+        
         <div id= "progress-bar-container">
-          <div id= "progress-bar"></div>
+          <div id= "calorie-bar-fill" class = "bar-fill"></div>
         </div>
       </section>
 
@@ -39,7 +39,7 @@
             <span class="macro-goal" id="fat-goal">50</span>
           </div>
           <div class ="macro-bar-container">
-            <div class="macro-bar" id="fat-bar"></div>
+            <div class ="bar-fill" id="fat-bar-fill"></div>
           </div>
            <!--Carbs-->
           <div class="macro">
@@ -48,7 +48,7 @@
             <span class="macro-goal" id="carb-goal">50</span>
           </div>
           <div class ="macro-bar-container">
-            <div class="macro-bar" id="carb-bar"></div>
+            <div class = "bar-fill" id="carb-bar-fill"></div>
           </div>
            <!--Protein-->
           <div class="macro">
@@ -57,7 +57,7 @@
             <span class="macro-goal" id="protein-goal">50</span>
           </div>
           <div class ="macro-bar-container">
-            <div class="macro-bar" id="protein-bar"></div>
+            <div class = "bar-fill" id="protein-bar-fill"></div>
           </div>
         </div>
 
@@ -72,7 +72,7 @@
           <input type="text" id="meal-name" placeholder="Enter Meal Name" class ="user-input">
         </div>
       </div>
-
+      
       <div class="hidden" id="meal-summary-overlay">
         <div id="meal-buttons">
           <button id="cancel-meal" class="meal-overlay-btn">Cancel</button>
@@ -82,14 +82,14 @@
           <span> Calories: <span id="calorie-meal">0</span>kcal</span>
           <span> Fats: <span id="fat-meal">0</span>g </span>
           <span> Carbs: <span id="carb-meal">0</span>g </span>
-          <span>Protein: <span id="protein-meal">0</span>g </span>
+          <span> Protein: <span id="protein-meal">0</span>g </span>
         </div>
 
       </div>
 
-      <button id = options-button>Options</button>
+      <button id ="options-button">Options</button>
       
-      <section id="options-window" class = "hidden">
+      <section id="options-window" class ="hidden">
         <h2>Settings</h2>
         <!--Change user Macro goals-->
         <div class="set-row">
