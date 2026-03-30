@@ -1,2 +1,2 @@
 # Cal-Tracker
- A calore tracking progressive web app
+ A calorie tracking progressive web app
