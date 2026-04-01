@@ -1,9 +1,17 @@
-import { renderBars } from "./progress";
+import { renderBars } from "./progress.js";
+import { init_form_events } from "./forms.js";
 //Will render all components in document
+
 function renderAll()
 {
     renderDate();
     renderBars();
+    
+}
+function init_events()
+{
+    init_form_events();
+    init_options_event();
 }
 
 function renderDate()
@@ -35,5 +43,13 @@ function renderDate()
     p.innerHTML = manualDate;
 }
 
+function init_options_event(){
+    const btn = document.getElementById("options-button");
 
-export {renderAll};
+    btn.addEventListener("click", () => {
+        const options_window = document.getElementById("options-window");
+        options_window.classList.add("open");
+    });
+}
+
+export {renderAll, init_events};

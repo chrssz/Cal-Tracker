@@ -19,5 +19,21 @@ function getUserGoals(){
 function getUserConsumed() {
     return user_consumed;
 }
+function setUserGoals(new_goals){
+    
+    for(let key in new_goals){
+        user_goals[key] = new_goals[key];
+    }
+    
+    return 1;
+}
+function setConsumed(consumed) {
+    for(let key in new_goals){
+        user_consumed[key] = consumed[key];
+    }
 
-export {getUserGoals, getUserConsumed};
+    return 1;
+}
+
+
+export {getUserGoals, getUserConsumed, setConsumed, setUserGoals};

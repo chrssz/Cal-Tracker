@@ -9,8 +9,7 @@
     <link rel="stylesheet" href="/src/style.css">
   </head>
   <body>
-    <section id="main">
-
+    <section id="main" class = "panel">
       <section id="app-name">
         <h1>Cal Tracker</h1>
         <p id="date"></p>
@@ -60,19 +59,7 @@
             <div class = "bar-fill" id="protein-bar-fill"></div>
           </div>
         </div>
-
-        <!--Add Meal-->
-        <div class= "meal-section">
-          <h3><button id = "log-meal">Log a Meal</button></h3>
-        </div>
       </section>
-
-      <!--Add meal window pop up Initially Hidden-->
-      <div class="hidden" id="add-meal-container">
-          <input type="text" id="meal-name" placeholder="Enter Meal Name" class ="user-input">
-        </div>
-      </div>
-      
       <div class="hidden" id="meal-summary-overlay">
         <div id="meal-buttons">
           <button id="cancel-meal" class="meal-overlay-btn">Cancel</button>
@@ -89,18 +76,20 @@
 
       <button id ="options-button">Options</button>
       
-      <section id="options-window" class ="hidden">
+    </section>
+    <!--Options Window-->
+    <section id="options-window" class="window">
         <h2>Settings</h2>
         <!--Change user Macro goals-->
         <div class="set-row">
           <div class="set-name">Calories</div>
-          <div><input id="set-cal" class="set-input" type="number" min="0"></div>
+          <div><input id="set-calories" class="set-input" type="number" min="0"></div>
           <div class="set-info">kcal/ day</div>
         </div>
 
         <div class="set-row">
           <div class="set-name">Fat</div>
-          <div><input id="set-fat" class="set-input" type="number" min="0"></div>
+          <div><input id="set-fats" class="set-input" type="number" min="0"></div>
           <div class="set-info">grams / day</div>
         </div>
 
@@ -120,8 +109,19 @@
           <button id="cancel-goals" class="overlay-btn">Cancel</button>
           <button id="save-goals" class = "overlay-btn">Save</button>
         </div>
+    </section>
+    <!--Meal Section-->
+    <section id = "meal" class = "panel">
+      <div class= "meal-section">
+        <h3><button id = "log-meal">Log a Meal</button></h3>
       </div>
+    </section>
 
+      <!--Add meal window pop up Initially Hidden-->
+      <div class="hidden" id="add-meal-container">
+          <input type="text" id="meal-name" placeholder="Enter Meal Name" class ="user-input">
+        </div>
+      </div>
     </section>
     
     <script type="module" src="/src/scripts/main.js"></script>

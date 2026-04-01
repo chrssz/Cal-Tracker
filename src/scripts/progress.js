@@ -1,6 +1,5 @@
 import {getUserGoals, getUserConsumed } from "./user_info.js";
 
-
 function renderBars(){
     const progressBars = ["calorie-bar-fill", "fat-bar-fill", "carb-bar-fill", "protein-bar-fill"];
     progressBars.forEach(element => {
