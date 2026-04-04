@@ -60,20 +60,7 @@
           </div>
         </div>
       </section>
-      <div class="hidden" id="meal-summary-overlay">
-        <div id="meal-buttons">
-          <button id="cancel-meal" class="meal-overlay-btn">Cancel</button>
-          <button id="save-meal" class = "meal-overlay-btn">Save</button>
-        </div>
-        <div id="meal-macro-summary">
-          <span> Calories: <span id="calorie-meal">0</span>kcal</span>
-          <span> Fats: <span id="fat-meal">0</span>g </span>
-          <span> Carbs: <span id="carb-meal">0</span>g </span>
-          <span> Protein: <span id="protein-meal">0</span>g </span>
-        </div>
-
-      </div>
-
+      
       <button id ="options-button">Options</button>
       
     </section>
@@ -110,18 +97,55 @@
           <button id="save-goals" class = "overlay-btn">Save</button>
         </div>
     </section>
-    <!--Meal Section-->
-    <section id = "meal" class = "panel">
-      <div class= "meal-section">
-        <h3><button id = "log-meal">Log a Meal</button></h3>
-      </div>
-    </section>
 
-      <!--Add meal window pop up Initially Hidden-->
-      <div class="hidden" id="add-meal-container">
-          <input type="text" id="meal-name" placeholder="Enter Meal Name" class ="user-input">
+     <!--Add meal window pop up Initially Hidden-->
+    <div id="add-meal-container" class="window">
+        <div id="meal-name-container">
+          Enter Meal Name:
+          <input id="meal-name" placeholder="e.g Breakfast"> </input>
         </div>
-      </div>
+
+        <div class="tabs">
+          <button class="overlay-btn">Custom Food</button>
+          <button class="overlay-btn">Your Foods</button>
+        </div>
+        
+        <div id="food-selected">
+          
+        </div>
+        <div id="manual-input">
+          Enter Food Name<input id="input-name" placeholder="Chicken Sandwich"></input>
+          Enter Calories<input id="input-calories"></input>
+          Enter Fat<input id ="input-fats"></input>
+          Enter Carb<input id="input-carbs"></input>
+          Enter Protein<input id="input-protein"></input>
+          <button id="clear-food" class="overlay-btn">Clear</button>
+          <button id="add-food" class="overlay-btn">Add food</button>
+        </div>
+
+        <div id="food-list">
+          <h3>Your Foods</h3>
+          <div id="food-items">
+            <div class="example"> Some Food</div>
+          </div>
+
+        </div>
+        <div id="meal-total">
+          <span> Calories: <span id="meal-calories">0</span>kcal</span>
+          <span> Fats: <span id="meal-fats">0</span>g </span>
+          <span> Carbs: <span id="meal-carbs">0</span>g </span>
+          <span> Protein: <span id="meal-protein">0</span>g </span>
+        </div>
+        <div id="meal-option-buttons">
+          <button id="cancel-meal" class="overlay-btn">Cancel</button>
+          <button id="save-meal" class = "overlay-btn">Save</button>
+        </div>
+    </div>
+  
+    <!--Add Meal Section-->
+    <section id = "add-meal-section" class ="panel">
+      <h3><button id = "log-meal-button">Log a Meal</button></h3>
+      <div id="meal-history"></div>
     </section>
     
     <script type="module" src="/src/scripts/main.js"></script>

@@ -1,5 +1,6 @@
 import { renderBars } from "./progress.js";
 import { init_form_events } from "./forms.js";
+import { init_meal_events } from "./meal.js";
 //Will render all components in document
 
 function renderAll()
@@ -12,6 +13,8 @@ function init_events()
 {
     init_form_events();
     init_options_event();
+    init_log_meal_event();
+    init_meal_events();
 }
 
 function renderDate()
@@ -52,4 +55,11 @@ function init_options_event(){
     });
 }
 
+function init_log_meal_event(){
+    const btn = document.getElementById("log-meal-button");
+    btn.addEventListener("click", () => {
+        const add_meal = document.getElementById("add-meal-container");
+        add_meal.classList.add("open");
+    });
+}
 export {renderAll, init_events};

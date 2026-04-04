@@ -1,4 +1,6 @@
 import { renderAll, init_events} from "./uiRender";
 
-renderAll();
-init_events();
+document.addEventListener("DOMContentLoaded", () => {
+    renderAll();
+    init_events();
+});

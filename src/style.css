@@ -7,6 +7,8 @@
   --info-color: #9c9c9c;
   --progress-bar-radius: 6.5%;
   --panel-gap: 0.5rem;
+  --btn-background:#e8e5e5;
+  --btn-background-hover:#bcb9b9;
 }
 
 
@@ -14,7 +16,9 @@
 body{
   background: var(--body-bg-color);
   margin: auto 0;
-  padding: 16px;
+  padding: 15px;
+  overflow-y: auto; 
+  font-size: 20px;
 }
 
 #app-name{
@@ -35,35 +39,13 @@ body{
   align-items: center;
   justify-content: center;
   position: absolute;
-  top: 0;
-  
   width: 100%;
   height: 100%;
   background-color: var(--main-bg-color);
-  
   z-index: 999;
-}
-#macro-meal{
-  flex-direction: row;
-}
-#meal-summary-overlay{
-  flex-direction: column;
-  width: 100%;
-  background-color: var(--body-bg-color);
-  box-shadow: 0.5px 0px 4px rgb(136, 135, 135);
-  z-index: 1000;
-  gap: 2px
-}
-#meal-buttons {
-  display: flex;
-  justify-content: center;  
   
 }
-#meal-macro-summary{
-  display: flex;
-  flex-direction: flex-end;
-  gap: 5px;
-}
+
 #food-list-container{
   position: absolute;
   background-color: red;
@@ -76,7 +58,9 @@ body{
   top:0;
   z-index: 0;
 }
-
+#options-window{
+  height: 100%;
+}
 #progress-bar-container{
   width: 100%;
   background-color: #e0e0e0;
@@ -86,6 +70,42 @@ body{
   margin-bottom: 10px;
   border: none;
  
+}
+#meal-total{
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+
+}
+#log-meal-button{
+  width: 100%;
+  padding: 1%;
+  background-color: #75cae0;
+  border: none;
+  border-radius: var(--progress-bar-radius);
+  overflow: hidden;
+}
+#add-meal-container{
+  height: 65%;
+}
+#manual-input{
+  display:flex;
+  flex-direction: column;
+  max-width: 70%;
+  margin: 0 auto;
+  padding-top: 20px;
+}
+
+#meal-option-buttons{
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+#meal-name-container{
+  display:flex;
+  justify-content: center;
+  padding-top: 10px;
+  gap: 10px;
 }
 /* ClassStyles */
 .panel {
@@ -106,17 +126,15 @@ body{
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 100%;
   z-index: 999;
   background-color: var(--main-bg-color);
   overflow-y: auto;  /* scroll if content is too tall */
   max-height: 0;
   transition: max-height 0.5s ease-in;
-  margin: 0 auto;
-  
+  box-shadow: 0 1px 5px black;
 }
-
 .window.open {
+  
   max-height: 100vh;
 }
 .user-input{
@@ -126,8 +144,16 @@ body{
 }
 .overlay-btn{
   border: 0.2px solid rgb(255, 251, 251);
+  background-color: var(--btn-background);
   border-radius: 15%;
   font-weight: var(--font-weight);
+  font-size: 15px;
+}
+.overlay-btn:hover{
+  background-color: var(--btn-background-hover);
+}
+.overlay-btn.enabled{
+  background-color: var(--btn-background-hover);
 }
 .set-row{
   display: flex;
@@ -152,6 +178,14 @@ body{
   margin-bottom: 10px;
   border: none;
 }
+.tabs{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px;
+}
+
 /* Progress Bars */
 .bar-fill {
   height: 100%;
