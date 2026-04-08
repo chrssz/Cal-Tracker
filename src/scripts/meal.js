@@ -1,82 +1,56 @@
-/* One meal has : foods, foods have calories and macros */
-let foods = [];
+let current_meal = [];
+let current_foods = [];
 
-function init_meal_events() {
-    const add_f = document.getElementById("add-food");
-    const clear_f = document.getElementById("clear-food")
-    add_f.addEventListener("click", () => { 
-        add_food();
-    });
-    clear_f.addEventListener("click", () => {
-        clear_input();
-    })
-}   
+function update_meal_macros(food_object){
+    const meal_cals = parseInt(document.getElementById("meal-calories").textContent) || 0;
+    const meal_fats = parseInt(document.getElementById("meal-fats").textContent) || 0;
+    const meal_carbs = parseInt(document.getElementById("meal-carbs").textContent) || 0;
+    const meal_protein = parseInt(document.getElementById("meal-protein").textContent) || 0;
+    
+    document.getElementById("meal-calories").innerHTML = meal_cals + food_object.calories;
+    document.getElementById("meal-fats").innerHTML = meal_fats + food_object.fats;
+    document.getElementById("meal-carbs").innerHTML = meal_carbs + food_object.carbs;
+    document.getElementById("meal-protein").innerHTML = meal_protein + food_object.protein;
 
-function add_food() {
-    const user_input = ["input-calories", "input-fats", "input-carbs", "input-protein"];
-    const food = {
-        name: document.getElementById("input-name").value || "Unnamed Food",
+    current_meal.push(food_object);
+    current_foods.push(food_object);
+
+    updateMealInsertedFoods();
+}
+
+function getTotalValue() {
+    const forms = ["food-calories", "food-fats", "food-carbs", "food-protein"];
+
+    total = {
         calories: 0,
         fats: 0,
         carbs: 0,
         protein: 0
-    };
-    user_input.forEach(element => {
-        let form = document.getElementById(element);
-        let s = element.slice(6);
-        food[s] = Math.max(0, parseInt(form.value) || 0);
+    }
+    current_meal.forEach(food => {
+        total.calories += food.calories;
+        total.fats += food.fats;
+        total.carbs += food.carbs;
+        total.protein += food.protein;
     });
-    foods.push(food);
-    renderMealTotal(); 
-    renderFoodList();  
-    clear_input();
-}
-
-function renderMealTotal() {
-    const total = getFoodTotal();
-    document.getElementById("meal-calories").innerText = total.calories;
-    document.getElementById("meal-fats").innerText = total.fats;
-    document.getElementById("meal-carbs").innerText = total.carbs;
-    document.getElementById("meal-protein").innerText = total.protein;
-}
-
-function renderFoodList() {
-    const food_items = document.getElementById("food-selected");
-    food_items.innerHTML = "";
-    foods.forEach((food, index) => {
-        const div = document.createElement("div");
-        div.classList.add("food-item");
-        div.innerText = `${food.name} — ${food.calories}kcal`;
-        food_items.appendChild(div);
-    });
-}
-
-function clearFoods(){
-    foods = [];
-    document.getElementById("food-selected").innerHTML = "";
-    document.getElementById("meal-calories").innerText = 0;
-    document.getElementById("meal-fats").innerText = 0;
-    document.getElementById("meal-carbs").innerText = 0;
-    document.getElementById("meal-protein").innerText = 0;
-
-    clear_input();
-}
-function clear_input(){
-    const input = ["input-name", "input-calories", "input-fats", "input-carbs", "input-protein"];
-    input.forEach(element => {
-        const current = document.getElementById(element);
-        
-        current.value = '';
-    });
-}
-function getFoodTotal() {
-    const total = {calories: 0, fats: 0, carbs: 0, protein: 0};
-    foods.forEach(food => {
-        for(let macro in total) {
-            total[macro] += food[macro] || 0;
-        }
-    });
+    
     return total;
 }
 
-export {init_meal_events, clearFoods, getFoodTotal, clear_input};
+
+function updateMealInsertedFoods(){
+    const food_select = document.getElementById("food-selected");
+    current_foods.forEach(element => {
+        const new_div = document.createElement("div");
+        new_div.textContent = element.name;
+
+        food_select.appendChild(new_div);
+    });
+
+
+}
+function clearMeal() {
+    current_meal = {};
+}
+
+export {update_meal_macros}
