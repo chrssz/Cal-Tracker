@@ -23,6 +23,9 @@ function getUserConsumed() {
 function getUserMeals(){
     return user_meals;
 }
+function getUserFoods(){
+    return user_foods;
+}
 function setUserGoals(new_goals){
     
     for(let key in new_goals){
@@ -43,4 +46,4 @@ function addUserMeals(meal){
 function addUserFoods(food){
     user_foods.push(food);
 }
-export {getUserGoals, getUserConsumed, setConsumed, setUserGoals};
+export {getUserGoals, getUserConsumed, setConsumed, setUserGoals, getUserFoods, addUserFoods};
