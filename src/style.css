@@ -107,6 +107,13 @@ body{
   padding-top: 10px;
   gap: 10px;
 }
+
+#food-selected {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
 /* ClassStyles */
 .panel {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -185,7 +192,22 @@ body{
   gap: 10px;
   padding: 15px;
 }
-
+.added-food{
+  display:flex;
+  flex-direction: column;
+  border-radius: 15px;
+  overflow: hidden;
+  background-color: var(--btn-background);
+  padding: 5px;
+}
+.added-food-name {
+  text-align: center;
+  
+}
+.added-food-info {
+  color: var(--info-color);
+  font-size: 15px;
+}
 /* Progress Bars */
 .bar-fill {
   height: 100%;
