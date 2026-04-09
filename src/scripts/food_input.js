@@ -1,7 +1,6 @@
 /* Handles the data given from the form food input */
 /*This functionaliy handles the input of data, and the buttons associated with the input; Clear, Add Food */
 import { update_meal_macros } from "./meal";
-
 function init_food_input_events(){
     init_food_input_clear();
     init_food_input_add();
@@ -17,7 +16,6 @@ function init_food_input_add(){
 
     btn.addEventListener("click", () => {add_input();});
 }
-
 
 function clear_input(){
     const inputs = ["food-name","food-calories","food-fats","food-carbs", "food-protein"];
@@ -59,4 +57,4 @@ function getFood() {
 
     return food_object;
 }
-export {init_food_input_events}
+export {init_food_input_events, clear_input}

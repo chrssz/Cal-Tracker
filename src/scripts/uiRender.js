@@ -1,6 +1,7 @@
 import { renderBars } from "./progress.js";
 import { init_form_events } from "./goalForms.js";
 import { init_food_input_events } from "./food_input.js";
+import { init_meal_events } from "./meal.js";
 //Will render all components in document
 function renderAll()
 {
@@ -13,6 +14,7 @@ function init_events()
     init_options_event();
     init_log_meal_event();
     init_food_input_events();
+    init_meal_events();
 }
 
 function renderDate()
