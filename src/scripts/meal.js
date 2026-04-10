@@ -104,8 +104,8 @@ function saveMeal() {
 
 function cancelMeal(){
     close_meal_window();
-    clear_meal_and_food();
     clear_input();
+    clear_meal_and_food();
     clear_meal_macros();
     clearMealInsertedFoods();
 }

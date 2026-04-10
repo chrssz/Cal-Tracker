@@ -110,26 +110,31 @@
           <button id ="foodList-btn" class="overlay-btn">Your Foods</button>
         </div>
         
-        <div id="food-selected">
-          
-        </div>
-        <div id="food-input">
-          Enter Food Name<input id="food-name" placeholder="Chicken Sandwich"></input>
-          Enter Calories<input id="food-calories"></input>
-          Enter Fat<input id ="food-fats"></input>
-          Enter Carb<input id="food-carbs"></input>
-          Enter Protein<input id="food-protein"></input>
-          <button id="clear-food" class="overlay-btn">Clear</button>
-          <button id="add-food" class="overlay-btn">Add food</button>
-        </div>
-
         <div id="food-list" class ='hidden'>
           <h3>Your Foods</h3>
           <div id="food-items">
-            <div class="example"> Some Food</div>
+            <div class="food-list-item"> Some Food</div>
           </div>
 
         </div>
+
+        <div id="food-selected">
+        </div>
+
+        <div id="food-input">
+          Enter Food Name<input id="food-name" placeholder="Food Name"></input>
+          Enter Calories<input id="food-calories" placeholder="Calories (kcal)"></input>
+          Enter Fat<input id ="food-fats" placeholder="Fat (g)"></input>
+          Enter Carb<input id="food-carbs" placeholder="Carbs (g)"></input>
+          Enter Protein<input id="food-protein" placeholder="Protein (g)"></input>
+          <span id = "enter-gram" class="hidden">Enter Grams:</span>
+          <input id="food-gram" class="hidden" placeholder="Grams (per serving)"></input>
+
+          <button id="clear-food" class="overlay-btn">Clear</button>
+          <button id="add-food" class="overlay-btn">Add food</button>
+          <button id="save-food" class="overlay-btn hidden">Save food</button>
+        </div>
+
         <div id="meal-total">
           <span> Calories: <span id="meal-calories">0</span>kcal</span>
           <span> Fats: <span id="meal-fats">0</span>g </span>
