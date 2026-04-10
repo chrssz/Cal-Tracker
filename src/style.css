@@ -46,11 +46,13 @@ body{
   
 }
 
-#food-list-container{
-  position: absolute;
-  background-color: red;
-  top: 0;
-  left: 0;
+#food-list{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#food-list.hidden{
+  display: none;
 }
 #options-button {
   position: absolute;
@@ -105,6 +107,13 @@ body{
   display:flex;
   justify-content: center;
   padding-top: 10px;
+  gap: 10px;
+}
+
+#food-selected {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 10px;
 }
 /* ClassStyles */
@@ -184,6 +193,23 @@ body{
   justify-content: center;
   gap: 10px;
   padding: 15px;
+}
+.added-food{
+  display:flex;
+  flex-direction: column;
+  border-radius: 15px;
+  overflow: hidden;
+  background-color: var(--btn-background);
+  padding: 5px;
+}
+
+.added-food-name {
+  text-align: center;
+  
+}
+.added-food-info {
+  color: var(--info-color);
+  font-size: 15px;
 }
 
 /* Progress Bars */

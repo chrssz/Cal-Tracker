@@ -56,15 +56,29 @@ function getTotalValue() {
 /* This can be optimized; in the future look for a hashmap to store selected foods for O(1) lookup and deletion */
 function clearMealInsertedFoods() {
     const food_select = document.getElementById("food-selected");
-    food_select.childNodes.forEach(element => {
-        element.remove();
-    });
+    while (food_select.firstChild) {
+        food_select.removeChild(food_select.firstChild);
+    }
 }
+
 function updateMealInsertedFoods(){
     const food_select = document.getElementById("food-selected");
     current_foods.forEach(element => {
         const new_div = document.createElement("div");
-        new_div.textContent = element.name;
+        new_div.classList.add("added-food");
+
+        const added_food_name_div = document.createElement("div");
+        added_food_name_div.classList.add("added-food-name");
+        
+        added_food_name_div.innerHTML = element.name;
+
+        const added_food_info_div = document.createElement("div");
+        added_food_info_div.classList.add("added-food-info");
+
+        added_food_info_div.innerHTML = `Cals:${element.calories} F:${element.fats}g C:${element.carbs}g P:${element.protein}g`;
+
+        new_div.appendChild(added_food_name_div);
+        new_div.appendChild(added_food_info_div);
 
         food_select.appendChild(new_div);
     });
@@ -77,25 +91,28 @@ function saveMeal() {
     /*Some call to the api here, for now local. */
 
     close_meal_window();
+    
+    const total = getTotalValue(); /* Future api call here*/
+
     clear_input();
     clear_meal_macros();
-
-    const total = getTotalValue();
-
+    clearMealInsertedFoods();
+    clear_meal_and_food();
     setConsumed(total);
     renderAll();
 }
 
 function cancelMeal(){
-    /* Clear Everything */
-    current_meal = {};
-    current_foods = {};
-   
     close_meal_window();
     clear_input();
+    clear_meal_and_food();
     clear_meal_macros();
+    clearMealInsertedFoods();
 }
-
+function clear_meal_and_food(){
+    current_foods = {};
+    current_foods = {};
+}
 function close_meal_window(){
     document.getElementById("add-meal-container").classList.remove("open");
 }
