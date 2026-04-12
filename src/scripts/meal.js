@@ -10,7 +10,7 @@ function init_meal_events(){
     save_meal.addEventListener("click", () => {saveMeal();});
     cancel_meal.addEventListener("click", ()=>{cancelMeal();});
 }
-function update_meal_macros(food_object){
+function addFood(food_object){
     const meal_cals = parseInt(document.getElementById("meal-calories").textContent) || 0;
     const meal_fats = parseInt(document.getElementById("meal-fats").textContent) || 0;
     const meal_carbs = parseInt(document.getElementById("meal-carbs").textContent) || 0;
@@ -23,9 +23,6 @@ function update_meal_macros(food_object){
 
     current_meal.push(food_object);
     current_foods.push(food_object);
-    console.log(current_foods);
-
-    clearMealInsertedFoods();
     updateMealInsertedFoods();
 }
 function clear_meal_macros() {
@@ -62,6 +59,7 @@ function clearMealInsertedFoods() {
 }
 
 function updateMealInsertedFoods(){
+    clearMealInsertedFoods();
     const food_select = document.getElementById("food-selected");
     current_foods.forEach(element => {
         const new_div = document.createElement("div");
@@ -74,18 +72,54 @@ function updateMealInsertedFoods(){
 
         const added_food_info_div = document.createElement("div");
         added_food_info_div.classList.add("added-food-info");
-
+        
         added_food_info_div.innerHTML = `Cals:${element.calories} F:${element.fats}g C:${element.carbs}g P:${element.protein}g`;
 
+        const delete_button = deleteButton(element);
+
+        new_div.append(delete_button);
         new_div.appendChild(added_food_name_div);
         new_div.appendChild(added_food_info_div);
 
         food_select.appendChild(new_div);
     });
 
+}
+function deleteFoodMacros(food_object){
+    const meal_cals = parseInt(document.getElementById("meal-calories").textContent) || 0;
+    const meal_fats = parseInt(document.getElementById("meal-fats").textContent) || 0;
+    const meal_carbs = parseInt(document.getElementById("meal-carbs").textContent) || 0;
+    const meal_protein = parseInt(document.getElementById("meal-protein").textContent) || 0;
+    
+    document.getElementById("meal-calories").innerHTML = meal_cals - food_object.calories;
+    document.getElementById("meal-fats").innerHTML = meal_fats - food_object.fats;
+    document.getElementById("meal-carbs").innerHTML = meal_carbs - food_object.carbs;
+    document.getElementById("meal-protein").innerHTML = meal_protein - food_object.protein;
+}
+function removeFood(food){
+    const new_foods = [];
 
+    deleteFoodMacros(food);
+
+    current_foods.forEach((element, i) => {
+        if(element.id != food.id){
+            new_foods.push(element);
+        }
+    });
+    
+    current_foods = new_foods;
+    updateMealInsertedFoods();
 }
 
+function deleteButton(food) {
+    const btn = document.createElement("button");
+    btn.classList.add("delete-item-btn");
+    btn.addEventListener("click", () => {
+        removeFood(food);
+    });
+    
+    return btn;
+}
 function saveMeal() {
     /* Save this meal and its food contents */
     /*Some call to the api here, for now local. */
@@ -110,10 +144,10 @@ function cancelMeal(){
     clearMealInsertedFoods();
 }
 function clear_meal_and_food(){
-    current_foods = {};
-    current_foods = {};
+    current_foods = [];
+    current_foods = [];
 }
 function close_meal_window(){
     document.getElementById("add-meal-container").classList.remove("open");
 }
-export {update_meal_macros, init_meal_events}
+export {addFood, init_meal_events, removeFood}

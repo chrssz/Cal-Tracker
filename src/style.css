@@ -9,6 +9,8 @@
   --panel-gap: 0.5rem;
   --btn-background:#e8e5e5;
   --btn-background-hover:#bcb9b9;
+  --food-list-items:#bcb9b9;
+  --meal-food-select: #0950f450;
 }
 
 
@@ -97,7 +99,9 @@ body{
   margin: 0 auto;
   padding-top: 20px;
 }
-
+#food-input-buttons{
+  padding-top: 10px;
+}
 #meal-option-buttons{
   display: flex;
   justify-content: center;
@@ -114,6 +118,12 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 10px;
+}
+#food-items{
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
   gap: 10px;
 }
 /* ClassStyles */
@@ -199,7 +209,7 @@ body{
   flex-direction: column;
   border-radius: 15px;
   overflow: hidden;
-  background-color: var(--btn-background);
+  background-color: var(--meal-food-select);
   padding: 5px;
 }
 
@@ -212,6 +222,29 @@ body{
   font-size: 15px;
 }
 
+.food-list-item{
+  display:flex;
+  flex-direction: row;
+  border-radius: 15px;
+  overflow: hidden;
+  background-color: var(--btn-background);
+  padding: 5px;
+  gap: 15px;
+}
+
+.delete-item-btn{
+  background-color: #af4c4c;
+  margin-left: auto;
+  width: 10%;
+  padding: 2.5%;
+}
+.select-item-btn{
+  background-color: #dfe925;
+  width: 10%;
+}
+.select-item-btn.active{
+  background-color: #0751ff;
+}
 /* Progress Bars */
 .bar-fill {
   height: 100%;
