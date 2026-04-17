@@ -1,7 +1,8 @@
 /* Handles the data given from the form food input */
 /*This functionaliy handles the input of data, and the buttons associated with the input; Clear, Add Food */
-import { update_meal_macros } from "./meal";
+import { addFood } from "./meal";
 import { update_food_list } from "./food_list";
+
 function init_food_input_events(){
     init_food_input_clear();
     init_food_input_add();
@@ -39,6 +40,7 @@ function init_tab_select(){
 
     })
 }
+/* Handles the logic for which type of input user selected (Custom food or food list) */
 function set_active(new_active){
     const slots = [document.getElementById("customFood-btn"), document.getElementById("foodList-btn")];
     const windows = [null, document.getElementById("food-list")];
@@ -91,7 +93,7 @@ function add_input() {
     const food = getFood();
     const slot = getActiveSlot();
 
-    const toDo = [update_meal_macros, update_food_list];
+    const toDo = [addFood, update_food_list];
     
     toDo[slot](food);
     clear_input();
@@ -107,8 +109,10 @@ function getActiveSlot() {
     return 1;
 }
 
+
 function getFood() {
     const food_object = {
+        id: generateId(),
         name: document.getElementById("food-name").value || '',
         calories: parseInt(document.getElementById("food-calories").value) || 0,
         fats: parseInt(document.getElementById("food-fats").value) || 0,
@@ -119,5 +123,8 @@ function getFood() {
 
     return food_object;
 }
-
+/* To be replace with a UUID call; needed for lan test  */
+function generateId() {
+    return Date.now().toString(36) + Math.random().toString(36).slice(2);
+}
 export {init_food_input_events, clear_input}

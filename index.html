@@ -98,6 +98,21 @@
         </div>
     </section>
 
+    <div id="serving-size-prompt" class="hidden">
+
+      <div id="serving-types" class ="tabs">
+        <button id="servings" class="overlay-btn active">Servings</button>
+        <button id="serving-grams" class="overlay-btn">Servings in grams</button>
+      </div>
+      
+  
+        <span id="serving-size-msg">Enter Servings</span>
+        <span id ="serving-grams-msg" class="hidden">Enter Serving Size (grams)</span>
+       
+        <input id="serving-size-input" class="set-input"  placeholder="Number of servings ex: (1, 2)" ></input>
+        <button id="add-food-list-insert">Add food</button>
+        <button id="cancel-food-list-insert">Cancel</button>
+    </div>
      <!--Add meal window pop up Initially Hidden-->
     <div id="add-meal-container" class="window">
         <div id="meal-name-container">
@@ -123,16 +138,18 @@
 
         <div id="food-input">
           Enter Food Name<input id="food-name" placeholder="Food Name"></input>
-          Enter Calories<input id="food-calories" placeholder="Calories (kcal)"></input>
-          Enter Fat<input id ="food-fats" placeholder="Fat (g)"></input>
-          Enter Carb<input id="food-carbs" placeholder="Carbs (g)"></input>
-          Enter Protein<input id="food-protein" placeholder="Protein (g)"></input>
+          Enter Calories<input id="food-calories"  placeholder="Calories (kcal)"></input>
+          Enter Fat<input id ="food-fats"  placeholder="Fat (g)"></input>
+          Enter Carb<input id="food-carbs"  placeholder="Carbs (g)"></input>
+          Enter Protein<input id="food-protein"  placeholder="Protein (g)"></input>
           <span id = "enter-gram" class="hidden">Enter Grams:</span>
           <input id="food-gram" class="hidden" placeholder="Grams (per serving)"></input>
-
-          <button id="clear-food" class="overlay-btn">Clear</button>
-          <button id="add-food" class="overlay-btn">Add food</button>
-          <button id="save-food" class="overlay-btn hidden">Save food</button>
+          
+          <div id="food-input-buttons">
+            <button id="clear-food" class="overlay-btn">Clear</button>
+            <button id="add-food" class="overlay-btn">Add food</button>
+            <button id="save-food" class="overlay-btn hidden">Save food</button>
+          </div>
         </div>
 
         <div id="meal-total">
@@ -153,6 +170,8 @@
       <div id="meal-history"></div>
     </section>
     
+    <div id="background-fade" class="hidden"></div>
+
     <script type="module" src="/src/scripts/main.js"></script>
   </body>
 </html>
