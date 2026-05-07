@@ -126,29 +126,14 @@ body{
   flex-direction: row;
   gap: 10px;
 }
-#serving-size-prompt {
-  position: fixed;              
-  top: 50%;                     
-  left: 50%;                   
-  transform: translate(-50%, -50%); /* perfect centering */
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.546);
-  width: fit-content;
-  padding: 15px;
-  z-index: 1001;
-  gap: 2.5px;
-  background: white;            
-  border-radius: 8px;           
-}
+
 #serving-size-prompt.hidden{
   display: none;
 }
 #serving-size-input {
   width:fit-content;
 }
-#background-fade{
+#background-fade {
   position: fixed;
   top: 0;
   left: 0;
@@ -157,7 +142,12 @@ body{
   background-color: rgba(42, 42, 42, 0.638);
   z-index: 1000;
 }
-
+#enable-delete {
+  background-color: #af4c4c;
+}
+#enable-delete.disabled {
+  background-color: var(--btn-background);
+}
 /* ClassStyles */
 .panel {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -254,28 +244,50 @@ body{
   font-size: 15px;
 }
 
-.food-list-item{
-  display:flex;
-  flex-direction: row;
+.food-list-item {
+  display: flex;
+  flex-direction: column;
   border-radius: 15px;
   overflow: hidden;
   background-color: var(--btn-background);
   padding: 5px;
   gap: 15px;
+  cursor: pointer; 
+  user-select: none; 
+}
+
+.food-list-item:active {
+  background-color: var(--btn-background-hover); 
+}
+
+.food-list-item.selected {
+    background-color: var(--meal-food-select);  
 }
 
 .delete-item-btn{
-  background-color: #af4c4c;
-  margin-left: auto;
-  width: 10%;
-  padding: 2.5%;
+  background-color: #dfe925;
+  width: 100%;
+  height: 100%;
 }
 .select-item-btn{
-  background-color: #dfe925;
-  width: 10%;
+  width: 100%;
+  display: block;
 }
-.select-item-btn.active{
-  background-color: #0751ff;
+.prompt-window {
+  position: fixed;              
+  top: 50%;                     
+  left: 50%;                   
+  transform: translate(-50%, -50%); 
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.546);
+  width: fit-content;
+  padding: 15px;
+  z-index: 1001;
+  gap: 2.5px;
+  background: white;            
+  border-radius: 8px;
 }
 /* Progress Bars */
 .bar-fill {

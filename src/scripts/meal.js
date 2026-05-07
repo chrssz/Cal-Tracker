@@ -1,8 +1,11 @@
-let current_meal = [];
+
 let current_foods = [];
+let current_meal_name = "Meal";
+
 import { clear_input } from "./food_input";
 import { renderAll } from "./uiRender";
-import { setConsumed } from "./user_info";
+import { setConsumed, addUserMeals } from "./user_info";
+import { updateHistoryUi } from "./food_history";
 function init_meal_events(){
     const save_meal = document.getElementById("save-meal");
     const cancel_meal = document.getElementById("cancel-meal");
@@ -21,7 +24,6 @@ function addFood(food_object){
     document.getElementById("meal-carbs").innerHTML = meal_carbs + food_object.carbs;
     document.getElementById("meal-protein").innerHTML = meal_protein + food_object.protein;
 
-    current_meal.push(food_object);
     current_foods.push(food_object);
     updateMealInsertedFoods();
 }
@@ -91,10 +93,10 @@ function deleteFoodMacros(food_object){
     const meal_carbs = parseInt(document.getElementById("meal-carbs").textContent) || 0;
     const meal_protein = parseInt(document.getElementById("meal-protein").textContent) || 0;
     
-    document.getElementById("meal-calories").innerHTML = meal_cals - food_object.calories;
-    document.getElementById("meal-fats").innerHTML = meal_fats - food_object.fats;
-    document.getElementById("meal-carbs").innerHTML = meal_carbs - food_object.carbs;
-    document.getElementById("meal-protein").innerHTML = meal_protein - food_object.protein;
+    document.getElementById("meal-calories").innerHTML = Math.max(meal_cals - food_object.calories, 0);
+    document.getElementById("meal-fats").innerHTML = Math.max(meal_fats - food_object.fats, 0);
+    document.getElementById("meal-carbs").innerHTML = Math.max(meal_carbs - food_object.carbs, 0);
+    document.getElementById("meal-protein").innerHTML = Math.max(meal_protein - food_object.protein, 0);
 }
 function removeFood(food){
     const new_foods = [];
@@ -123,10 +125,22 @@ function deleteButton(food) {
 function saveMeal() {
     /* Save this meal and its food contents */
     /*Some call to the api here, for now local. */
-
+    current_meal_name = document.getElementById("meal-name").value;
     close_meal_window();
     
-    const total = getTotalValue(); /* Future api call here*/
+    const total = getTotalValue();
+    const meal = {
+        name: current_meal_name || "Meal",  // meal name
+        foods: [...current_foods],             
+        calories: total.calories,                    
+        fats: total.fats,
+        carbs: total.carbs,
+        protein: total.protein
+    };
+    
+    /* Notify the user data with this new meal. */
+    addUserMeals(meal);
+    updateHistoryUi();
 
     clear_input();
     clear_meal_macros();
@@ -134,6 +148,8 @@ function saveMeal() {
     clear_meal_and_food();
     setConsumed(total);
     renderAll();
+
+
 }
 
 function cancelMeal(){
@@ -144,7 +160,6 @@ function cancelMeal(){
     clearMealInsertedFoods();
 }
 function clear_meal_and_food(){
-    current_foods = [];
     current_foods = [];
 }
 function close_meal_window(){

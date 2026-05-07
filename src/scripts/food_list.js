@@ -1,16 +1,22 @@
 /* Renders and handles input for food_list */
-import { addUserFoods, getUserFoods, getUserGoals } from "./user_info";
+import { addUserFoods, getUserFoods, getUserGoals, removeUserFood } from "./user_info";
 
 import { addFood, removeFood } from "./meal";
 function init_food_list_buttons(){
     init_gram_add_cancel();
     init_tabs();
-
 }
-function update_food_list(food) {
-    clear_food_list();
+function add_food_list(food){
     addUserFoods(food);
-    
+    update_food_list();
+}
+function remove_food_list(food){
+    removeUserFood(food);
+    update_food_list();
+}
+function update_food_list() {
+    clear_food_list();
+
     const user_foods = getUserFoods(); /* Future Api call here */
     const food_list = document.getElementById("food-items");
 
@@ -21,6 +27,7 @@ function update_food_list(food) {
     });
     
 }
+
 function clear_food_list(){
     const food_list = document.getElementById("food-items"); 
     while (food_list.firstChild) {
@@ -115,13 +122,29 @@ class FoodListItem {
         }
         const new_div = document.createElement("div");
         new_div.classList.add("food-list-item");
-        new_div.textContent = this.food.name;
+  
+        const foodname_div = document.createElement("div");
 
-        const select = this.get_select_btn();
-        //const del = this.get_delete_btn(); Implement later to allow user to remove items from list
-        
-        new_div.appendChild(select);
-        //new_div.appendChild(del);
+        foodname_div.classList.add("added-food-name");
+        foodname_div.innerHTML = `${this.food.name}`;
+
+        const info_div = document.createElement("div");
+
+        info_div.classList.add("added-food-info");
+        info_div.innerHTML = `Cals:${this.food.calories} F:${this.food.fats}g C:${this.food.carbs}g P:${this.food.protein}g`;
+
+        // press and hold for options menu
+        let hold_timer;
+        new_div.addEventListener("pointerdown", () => {
+            hold_timer = setTimeout(() => {
+                this.show_options_menu();
+            }, 600);  // 600 ms
+        });
+        new_div.addEventListener("pointerup", () => clearTimeout(hold_timer));
+        new_div.addEventListener("pointerleave", () => clearTimeout(hold_timer));
+
+        new_div.append(foodname_div);
+        new_div.append(info_div);
 
         this.div = new_div;
         return new_div;
@@ -147,31 +170,50 @@ class FoodListItem {
         console.log(new_food_instance);
         return new_food_instance;
     }
+    show_options_menu(){
+        const parentDiv = document.getElementById("main")
+        const options = document.createElement("div");
+        const back_ground_fade = document.getElementById("background-fade");
+        back_ground_fade.classList.remove("hidden");
+        options.classList.add("prompt-window");
+        
+        const add = document.createElement("button");
+        const del = document.createElement("button");
+        
+        add.classList.add("overlay-btn");
+        del.classList.add("overlay-btn");
 
+        add.innerHTML = `Add to meal`;
+        del.innerHTML = `Delete from list`;
+
+        add.addEventListener("click", ()=>{
+            this.select_div();
+            options.remove();
+        });
+
+        del.addEventListener("click", ()=>{
+            this.delete_div();
+            options.remove();
+            back_ground_fade.classList.add("hidden");
+            
+        })
+        options.appendChild(add);
+        options.appendChild(del);
+
+        parentDiv.appendChild(options);
+    }
     delete_div(){
         if(this.div != null){
             this.div.remove();
         }
     }
-
-    get_delete_btn(){
-        const btn = document.createElement("button");
-        btn.type = "button";
-        btn.classList.add("delete-item-btn");
-        btn.addEventListener("click", () => {this.delete_div();})
-        return btn;
-    }
-
-    get_select_btn(){
-        const btn = document.createElement("button");
-        btn.type = "button";
-        btn.classList.add("select-item-btn");
-        btn.addEventListener("click", () => {
+    select_div(){
+        if(this.div != null){
             selected_food = this;
             this.serving_size_prompt();
-        })
-        return btn;
+        }
     }
+
     /* Prompts user for serving size they want of this foods' instance */
     serving_size_prompt(){
         const prompt_window = document.getElementById("serving-size-prompt");
@@ -179,7 +221,8 @@ class FoodListItem {
 
         prompt_window.classList.remove("hidden");
         back_ground_fade.classList.remove("hidden");
-
     }
+
+
 }
-export {update_food_list, init_food_list_buttons}
+export {add_food_list, init_food_list_buttons}

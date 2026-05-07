@@ -98,8 +98,7 @@
         </div>
     </section>
 
-    <div id="serving-size-prompt" class="hidden">
-
+    <div id="serving-size-prompt" class="prompt-window hidden">
       <div id="serving-types" class ="tabs">
         <button id="servings" class="overlay-btn active">Servings</button>
         <button id="serving-grams" class="overlay-btn">Servings in grams</button>
@@ -128,7 +127,6 @@
         <div id="food-list" class ='hidden'>
           <h3>Your Foods</h3>
           <div id="food-items">
-            <div class="food-list-item"> Some Food</div>
           </div>
 
         </div>
@@ -167,9 +165,14 @@
     <!--Add Meal Section-->
     <section id = "add-meal-section" class ="panel">
       <h3><button id = "log-meal-button">Log a Meal</button></h3>
-      <div id="meal-history"></div>
     </section>
-    
+    <section id = "today-meals" class = "panel" >
+
+      <div id = "today-meal-history">
+
+      </div>
+
+    </section>
     <div id="background-fade" class="hidden"></div>
 
     <script type="module" src="/src/scripts/main.js"></script>
