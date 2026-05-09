@@ -1,7 +1,7 @@
 /* Handles the data given from the form food input */
 /*This functionaliy handles the input of data, and the buttons associated with the input; Clear, Add Food */
 import { addFood } from "./meal";
-import { update_food_list } from "./food_list";
+import { add_food_list } from "./food_list";
 
 function init_food_input_events(){
     init_food_input_clear();
@@ -93,7 +93,7 @@ function add_input() {
     const food = getFood();
     const slot = getActiveSlot();
 
-    const toDo = [addFood, update_food_list];
+    const toDo = [addFood, add_food_list];
     
     toDo[slot](food);
     clear_input();

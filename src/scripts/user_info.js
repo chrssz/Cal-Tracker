@@ -12,8 +12,8 @@ let user_consumed = {
     carbs: 0,
     protein: 0
 };
-let user_meals = [];
-let user_foods = [];
+let user_meals = []; /*  Users meals created */
+let user_foods = new Map(); /* Food List */
 function getUserGoals(){
     return user_goals;
 }
@@ -44,6 +44,19 @@ function addUserMeals(meal){
 }
 
 function addUserFoods(food){
-    user_foods.push(food);
+    user_foods.set(food.id, food);
 }
-export {getUserGoals, getUserConsumed, setConsumed, setUserGoals, getUserFoods, addUserFoods};
+
+function removeUserFood(food){
+    user_foods.delete(food.id);
+}
+
+function removeUserMeal(meal){
+    
+}
+export {
+    getUserGoals, getUserConsumed, 
+    setConsumed, setUserGoals, 
+    getUserFoods, addUserFoods, removeUserFood, 
+    getUserMeals, addUserMeals, removeUserMeal
+};
