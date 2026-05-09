@@ -205,6 +205,7 @@ class FoodListItem {
     delete_div(){
         if(this.div != null){
             this.div.remove();
+            removeUserFood(this.food);
         }
     }
     select_div(){

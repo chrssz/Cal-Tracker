@@ -108,6 +108,7 @@ class HistoryPanel {
     remove_meal() {
         removeUserMeal(this.index);
         if (this.div != null){this.div.remove()};
+        /* Needs to modify the user consumed to remove this current meal. TB WORKED ON*/
         updateHistoryUi();
         renderAll();
     }

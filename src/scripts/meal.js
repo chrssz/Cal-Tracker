@@ -145,7 +145,7 @@ function saveMeal() {
     clear_input();
     clear_meal_macros();
     clearMealInsertedFoods();
-    clear_meal_and_food();
+    clear_food();
     setConsumed(total);
     renderAll();
 
@@ -155,11 +155,11 @@ function saveMeal() {
 function cancelMeal(){
     close_meal_window();
     clear_input();
-    clear_meal_and_food();
+    clear_food();
     clear_meal_macros();
     clearMealInsertedFoods();
 }
-function clear_meal_and_food(){
+function clear_food(){
     current_foods = [];
 }
 function close_meal_window(){
