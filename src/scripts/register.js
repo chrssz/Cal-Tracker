@@ -1,0 +1,49 @@
+// Render date
+const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+const now = new Date();
+document.getElementById("date").textContent = `${months[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`;
+
+document.getElementById("register-btn").addEventListener("click", async () => {
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value;
+    const confirm  = document.getElementById("confirm-password").value;
+    const error    = document.getElementById("auth-error");
+    const success  = document.getElementById("auth-success");
+
+    error.textContent = "";
+    success.textContent = "";
+
+    if(!username || !password || !confirm) {
+        error.textContent = "Please fill in all fields.";
+        return;
+    }
+
+    if(password !== confirm) {
+        error.textContent = "Passwords do not match.";
+        return;
+    }
+
+    try {
+        const res = await fetch("http://localhost:3000/auth/register", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include",
+            body: JSON.stringify({ username, password })
+        });
+
+        const data = await res.json();
+
+        if(!res.ok) {
+            error.textContent = data.error || "Registration failed.";
+            return;
+        }
+
+        success.textContent = "Account created! Redirecting to login...";
+        setTimeout(() => {
+            window.location.href = "/login.html";
+        }, 1500);
+
+    } catch(err) {
+        error.textContent = "Could not connect to server.";
+    }
+});

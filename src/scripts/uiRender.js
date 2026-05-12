@@ -17,6 +17,7 @@ function init_events()
     init_food_input_events();
     init_meal_events();
     init_food_list_buttons();
+    init_logout_event();
 }
 
 function renderDate()
@@ -62,6 +63,17 @@ function init_log_meal_event() {
     btn.addEventListener("click", () =>{
         const window = document.getElementById("add-meal-container");
         window.classList.add("open");
+    });
+}
+
+function init_logout_event() {
+    const btn = document.getElementById("logout-button");
+    btn.addEventListener("click", async () => {
+        await fetch("http://localhost:3000/auth/logout", {
+            method: "POST",
+            credentials: "include"
+        });
+        window.location.href = "/login.html";
     });
 }
 export {renderAll, init_events};
