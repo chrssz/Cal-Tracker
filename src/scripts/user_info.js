@@ -12,7 +12,7 @@ let user_consumed = {
     carbs: 0,
     protein: 0
 };
-let user_meals = []; /*  Users meals created */
+let user_meals = new Map(); /*  Users meals created */
 let user_foods = new Map(); /* Food List */
 function getUserGoals(){
     return user_goals;
@@ -40,7 +40,8 @@ function setConsumed(consumed) {
 }
 
 function addUserMeals(meal){
-    user_meals.push(meal);
+    user_meals.set(meal.id, meal);
+
 }
 
 function addUserFoods(food){
@@ -52,7 +53,14 @@ function removeUserFood(food){
 }
 
 function removeUserMeal(meal){
-    
+    if(user_meals.has(meal.id)){
+        meal.forEach(food => {
+            for(let macro in user_consumed){
+                user_consumed[macro] -= (food[macro]|| 0);
+            }
+        });
+        user_meals.delete(meal.id);
+    }
 }
 export {
     getUserGoals, getUserConsumed, 
