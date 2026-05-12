@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="manifest" href="/manifest.webmanifest"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cal Tracker — Login</title>
+    <link rel="stylesheet" href="/src/style.css">
+    <link rel="stylesheet" href="/src/auth.css">
+  </head>
+  <body>
+    <section id="main" class="panel">
+      <section id="app-name">
+        <h1>Cal Tracker</h1>
+        <p id="date"></p>
+      </section>
+
+      <div id="auth-container">
+        <div class="auth-field">
+          <label class="auth-label" for="username">Username</label>
+          <input class="auth-input" id="username" type="text" placeholder="Enter your username" />
+        </div>
+
+        <div class="auth-field">
+          <label class="auth-label" for="password">Password</label>
+          <input class="auth-input" id="password" type="password" placeholder="Enter your password" />
+        </div>
+
+        <p id="auth-error"></p>
+
+        <button class="auth-btn" id="login-btn">Log In</button>
+
+        <p id="auth-footer">
+          Don't have an account? <a href="/register.html">Sign up</a>
+        </p>
+      </div>
+    </section>
+
+    <script src="/src/scripts/login.js"></script>
+  </body>
+</html>
