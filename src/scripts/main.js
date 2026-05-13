@@ -1,3 +1,5 @@
+import '../style.css';
+
 import { renderAll, init_events} from "./uiRender";
 
 document.addEventListener("DOMContentLoaded", () => {
