@@ -1,5 +1,6 @@
 //Gathers User info; calories, macro goals, meals etc.
 //Functions here to be replaced with api calls in future
+import { apiPost, apiGet, apiDelete } from "./api";
 let user_goals = {
     calories: 2000,
     fats: 50,
@@ -14,8 +15,9 @@ let user_consumed = {
 };
 let user_meals = new Map(); /*  Users meals created */
 let user_foods = new Map(); /* Food List */
-function getUserGoals(){
-    return user_goals;
+async function getUserGoals(caller){
+    const response = await apiGet('/goals/getGoals');
+    return response
 }
 function getUserConsumed() {
     return user_consumed;
@@ -26,12 +28,8 @@ function getUserMeals(){
 function getUserFoods(){
     return user_foods;
 }
-function setUserGoals(new_goals){
-    
-    for(let key in new_goals){
-        user_goals[key] = new_goals[key];
-    }
-    
+async function setUserGoals(new_goals){
+    return await apiPost('/goals/postGoals', new_goals);
 }
 function setConsumed(consumed) {
     for(let key in consumed){

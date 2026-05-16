@@ -7,10 +7,10 @@ function renderBars(){
     });
 }
 
-function updateFillSize(bar){
+async function updateFillSize(bar){
     // bar: [Goals, CurrentUserConsumed]
     const {calories, carbs, fats, protein} = getUserConsumed();
-    const {calories: goal_cals, fats: goal_fats, carbs: goal_carbs, protein: goal_protein} = getUserGoals();
+    const {calories: goal_cals, fats: goal_fats, carbs: goal_carbs, protein: goal_protein} = await getUserGoals();
     const bar_to_label = {
         "calorie-bar-fill": [calories, goal_cals],
         "carb-bar-fill": [carbs, goal_carbs],
