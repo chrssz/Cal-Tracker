@@ -1,3 +1,5 @@
+import { apiGet, apiPost } from "./api";
+
 // Render date
 const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 const now = new Date();
@@ -24,16 +26,9 @@ document.getElementById("register-btn").addEventListener("click", async () => {
     }
 
     try {
-        const res = await fetch("http://localhost:3000/auth/register", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            credentials: "include",
-            body: JSON.stringify({ username, password })
-        });
-
-        const data = await res.json();
-
-        if(!res.ok) {
+        const response = apiPost('/auth/register');
+        
+        if(!response.ok) {
             error.textContent = data.error || "Registration failed.";
             return;
         }

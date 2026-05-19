@@ -3,6 +3,8 @@ import { init_form_events } from "./goalForms.js";
 import { init_food_input_events } from "./food_input.js";
 import { init_meal_events } from "./meal.js";
 import { init_food_list_buttons } from "./food_list.js";
+import { apiPost } from "./api.js";
+import { updateHistoryUi } from "./food_history.js";
 //Will render all components in document
 function renderAll()
 {
@@ -18,6 +20,7 @@ function init_events()
     init_meal_events();
     init_food_list_buttons();
     init_logout_event();
+    updateHistoryUi();
 }
 
 function renderDate()
@@ -69,10 +72,8 @@ function init_log_meal_event() {
 function init_logout_event() {
     const btn = document.getElementById("logout-button");
     btn.addEventListener("click", async () => {
-        await fetch("http://localhost:3000/auth/logout", {
-            method: "POST",
-            credentials: "include"
-        });
+        await apiPost('/auth/logout');
+        
         window.location.href = "/login.html";
     });
 }

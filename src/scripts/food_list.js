@@ -1,23 +1,29 @@
 /* Renders and handles input for food_list */
-import { addUserFoods, getUserFoods, getUserGoals, removeUserFood } from "./user_info";
+import { addUserFoods, getUserFoods, removeUserFood } from "./user_info";
 
 import { addFood, removeFood } from "./meal";
 function init_food_list_buttons(){
     init_gram_add_cancel();
     init_tabs();
-}
-function add_food_list(food){
-    addUserFoods(food);
     update_food_list();
 }
-function remove_food_list(food){
-    removeUserFood(food);
+async function add_food_list(food){
+    await addUserFoods(food);
     update_food_list();
 }
-function update_food_list() {
+async function remove_food_list(food){
+    await removeUserFood(food);
+    update_food_list();
+}
+async function update_food_list() {
     clear_food_list();
 
-    const user_foods = getUserFoods(); /* Future Api call here */
+    const user_foods = await getUserFoods(); 
+    
+    if(user_foods.length == 0)
+    {
+        return;
+    }
     const food_list = document.getElementById("food-items");
 
     user_foods.forEach(food => {
@@ -167,7 +173,6 @@ class FoodListItem {
         new_food_instance.protein = Math.ceil(this.food.protein * scale);
         new_food_instance.grams = Math.ceil(grams);
         
-        console.log(new_food_instance);
         return new_food_instance;
     }
     show_options_menu(){
@@ -202,10 +207,10 @@ class FoodListItem {
 
         parentDiv.appendChild(options);
     }
-    delete_div(){
+    async delete_div(){
         if(this.div != null){
             this.div.remove();
-            removeUserFood(this.food);
+            await removeUserFood(this.food);
         }
     }
     select_div(){
