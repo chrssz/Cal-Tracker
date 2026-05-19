@@ -1,12 +1,12 @@
-import { getUserMeals, removeUserMeal } from "./user_info";
+import { getUserMeals, removeUserMeal, removeConsumed } from "./user_info";
 import { renderAll } from "./uiRender";
 
-function updateHistoryUi() {
+async function updateHistoryUi() {
     const history_container = document.getElementById("today-meal-history");
     if (!history_container) return;
 
     history_container.innerHTML = "";
-    const user_meals = getUserMeals();
+    const user_meals = await getUserMeals();
 
     if (user_meals.length === 0) {
         const empty = document.createElement("div");
@@ -15,8 +15,9 @@ function updateHistoryUi() {
         history_container.appendChild(empty);
         return;
     }
+    /* User meal is returned as an object with foods property */
 
-    user_meals.forEach((meal, index) => {
+    user_meals.meals.forEach((meal, index) => {
         const history_panel = new HistoryPanel(meal, index);
         history_container.appendChild(history_panel.get_div_element());
     });
@@ -105,11 +106,11 @@ class HistoryPanel {
         return panel;
     }
 
-    remove_meal() {
+    async remove_meal() {
         
-        removeUserMeal(this.foods);
+        await removeUserMeal(this.meal);
         if (this.div != null){this.div.remove()};
-        
+        await removeConsumed(this.foods);
         updateHistoryUi();
         renderAll();
     }

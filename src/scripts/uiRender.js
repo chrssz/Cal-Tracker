@@ -4,6 +4,7 @@ import { init_food_input_events } from "./food_input.js";
 import { init_meal_events } from "./meal.js";
 import { init_food_list_buttons } from "./food_list.js";
 import { apiPost } from "./api.js";
+import { updateHistoryUi } from "./food_history.js";
 //Will render all components in document
 function renderAll()
 {
@@ -19,6 +20,7 @@ function init_events()
     init_meal_events();
     init_food_list_buttons();
     init_logout_event();
+    updateHistoryUi();
 }
 
 function renderDate()

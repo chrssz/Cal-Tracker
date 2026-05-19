@@ -1,7 +1,6 @@
 
 let current_foods = [];
 let current_meal_name = "Meal";
-
 import { clear_input } from "./food_input";
 import { renderAll } from "./uiRender";
 import { setConsumed, addUserMeals } from "./user_info";
@@ -122,7 +121,7 @@ function deleteButton(food) {
     
     return btn;
 }
-function saveMeal() {
+async function saveMeal() {
     /* Save this meal and its food contents */
     /*Some call to the api here, for now local. */
     current_meal_name = document.getElementById("meal-name").value;
@@ -139,14 +138,15 @@ function saveMeal() {
     };
     
     /* Notify the user data with this new meal. */
-    addUserMeals(meal);
+    await addUserMeals(meal);
     updateHistoryUi();
 
     clear_input();
     clear_meal_macros();
     clearMealInsertedFoods();
     clear_food();
-    setConsumed(total);
+    
+    await setConsumed(total);
     renderAll();
 
 

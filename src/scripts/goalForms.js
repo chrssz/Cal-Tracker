@@ -26,8 +26,7 @@ async function save_goal(){
         let value = current.value != 0 ? parseInt(current.value) : goal[s];
         goal[s] = Math.max(0, value);
     });
-    //setUserGoals(goal);
-    console.log('Saving new goal', goal);
+    
     await setUserGoals(goal);
     set_default_goal(goal);
     renderAll();
