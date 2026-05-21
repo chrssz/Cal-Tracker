@@ -22,3 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+public/maskable-icon-512x512.png
+public/pwa-192x192.png
+public/pwa-512x512.png
+public/pwa-64x64.png
+public/apple-touch-icon-180x180.png
+public/favicon.ico
+public/favicon.svg
+public/icons.svg

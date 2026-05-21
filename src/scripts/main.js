@@ -6,12 +6,12 @@ async function checkAuth(){
     try {
        
         const response = await apiGet('/auth/check');
-      
+        
         if(response.error){
             window.location.href = '/login.html';
         }
 
-        await cleanUserMeals();
+        await clearUserMeals();
         
     } catch(error) {
         window.location.href = '/login.html';

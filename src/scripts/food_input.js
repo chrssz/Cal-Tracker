@@ -43,24 +43,18 @@ function init_tab_select(){
 /* Handles the logic for which type of input user selected (Custom food or food list) */
 function set_active(new_active){
     const slots = [document.getElementById("customFood-btn"), document.getElementById("foodList-btn")];
-    const windows = [null, document.getElementById("food-list")];
     const current_active = getActiveSlot();
-    
-    if (current_active != new_active)
-    {
-        const new_active = (current_active + 1) % 2;
 
-        slots[current_active].classList.remove("active");
-        slots[new_active].classList.add("active");
-        
-        if(windows[current_active] != null){
-            windows[current_active].classList.add("hidden");
+
+    slots.forEach((element, i) => {
+        if(element.classList.contains("active")){
+            element.classList.remove("active");
         }
-        
-        if(windows[new_active] != null){
-            windows[new_active].classList.remove("hidden");
+
+        if(i == new_active){
+            element.classList.add("active");
         }
-    }
+    });
     
 }
 
@@ -75,21 +69,24 @@ function updateText(){
     const message = { 0: [document.getElementById("add-food")],
                       1: [document.getElementById("save-food"), 
                         document.getElementById("enter-gram"),
-                        document.getElementById("food-gram")]
+                        document.getElementById("food-gram"), 
+                        document.getElementById("food-list")]
     };
     const current_active = getActiveSlot();
-
-    message[(current_active + 1) % 2].forEach(element => {
-        element.classList.add("hidden");
-    });
-
+    
+    for(let key in message) {
+        message[key].forEach(element => {
+            element.classList.add("hidden");
+        });
+    }
+    
     message[current_active].forEach(element =>{
         element.classList.remove("hidden");
     })
 }
 function add_input() {
-    /* Add input, can be added to two different states. It can be added to the current meal state ||
-       Or it can be added to the user-foods-list state */
+    /* Based on the current active slot, add food to the corresponding function */
+    
     const food = getFood();
     const slot = getActiveSlot();
 
@@ -102,11 +99,13 @@ function add_input() {
 /* Helper Functions */
 function getActiveSlot() {
     const slots = [document.getElementById("customFood-btn"), document.getElementById("foodList-btn")];
-    if (slots[0].classList.contains("active")){
-        return 0;
+    for (const [index, element] of slots.entries()) {
+        if (element.classList.contains("active")) {
+            return index;
+        }
     }
 
-    return 1;
+    return 0;
 }
 
 
@@ -123,7 +122,7 @@ function getFood() {
 
     return food_object;
 }
-/* To be replace with a UUID call; needed for lan test  */
+
 function generateId() {
     return Date.now().toString(36) + Math.random().toString(36).slice(2);
 }
