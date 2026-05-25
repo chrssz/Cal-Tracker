@@ -3,6 +3,8 @@
 import { addFood } from "./meal";
 import { add_food_list } from "./food_list";
 
+const buttons = [document.getElementById("customFood-btn"), document.getElementById("foodList-btn"), document.getElementById("ai-btn")];
+
 function init_food_input_events(){
     init_food_input_clear();
     init_food_input_add();
@@ -26,27 +28,21 @@ function init_food_input_add(){
 
     btn.addEventListener("click", () => {add_input();});
 }
-function init_tab_select(){
-    let custom_btn = document.getElementById("customFood-btn");
-    let food_btn = document.getElementById("foodList-btn");
-    /* 0 for custom_btn; 1 for active_btn */
-    custom_btn.addEventListener("click", () => {
-        set_active(0); 
-        updateText();
-    })
-    food_btn.addEventListener("click", () => {
-        set_active(1); 
-        updateText();
 
+function init_tab_select(){
+    buttons.forEach((button, i)=>{
+        button.addEventListener("click", () => {
+            set_active(i);
+            updateUi();
+            
+        })
     })
+    
 }
 /* Handles the logic for which type of input user selected (Custom food or food list) */
 function set_active(new_active){
-    const slots = [document.getElementById("customFood-btn"), document.getElementById("foodList-btn")];
     const current_active = getActiveSlot();
-
-
-    slots.forEach((element, i) => {
+    buttons.forEach((element, i) => {
         if(element.classList.contains("active")){
             element.classList.remove("active");
         }
@@ -65,30 +61,38 @@ function clear_input(){
         form.value = '';
     });
 }
-function updateText(){
-    const message = { 0: [document.getElementById("add-food")],
-                      1: [document.getElementById("save-food"), 
+function updateUi(){
+    
+    const message = { 0: [document.getElementById("food-input"), document.getElementById("add-food")],
+                      1: [
+                        document.getElementById("food-input"),
+                        document.getElementById("save-food"), 
                         document.getElementById("enter-gram"),
                         document.getElementById("food-gram"), 
-                        document.getElementById("food-list")]
+                        document.getElementById("food-list")],
+                     2: [document.getElementById("ai-agent-div")]
     };
     const current_active = getActiveSlot();
-    
+
+    //Set everything to hidden
     for(let key in message) {
         message[key].forEach(element => {
             element.classList.add("hidden");
         });
     }
-    
+
+    //Unhide elements that are important for current active
     message[current_active].forEach(element =>{
         element.classList.remove("hidden");
     })
+
+    
 }
-function add_input() {
+function add_input(customFood = null, input_slot = null) {
     /* Based on the current active slot, add food to the corresponding function */
     
-    const food = getFood();
-    const slot = getActiveSlot();
+    const food = customFood || getFood();
+    const slot = (input_slot !== null) ? input_slot : getActiveSlot();
 
     const toDo = [addFood, add_food_list];
     
@@ -98,8 +102,8 @@ function add_input() {
 
 /* Helper Functions */
 function getActiveSlot() {
-    const slots = [document.getElementById("customFood-btn"), document.getElementById("foodList-btn")];
-    for (const [index, element] of slots.entries()) {
+    
+    for (const [index, element] of buttons.entries()) {
         if (element.classList.contains("active")) {
             return index;
         }
@@ -126,4 +130,4 @@ function getFood() {
 function generateId() {
     return Date.now().toString(36) + Math.random().toString(36).slice(2);
 }
-export {init_food_input_events, clear_input}
+export {init_food_input_events, clear_input, add_input}

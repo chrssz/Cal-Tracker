@@ -117,8 +117,9 @@
     <div id="add-meal-container" class="window">
 
         <div class="tabs">
-          <button id="customFood-btn" class="overlay-btn active">Custom Food</button>
-          <button id ="foodList-btn" class="overlay-btn">Your Foods</button>
+          <button id="customFood-btn" class="overlay-btn active">Single Item</button>
+          <button id ="foodList-btn" class="overlay-btn">Food Library</button>
+          <button id="ai-btn" class="overlay-btn ai-btn">AI Analyzer</button>
         </div>
 
         <div id="food-list" class ='hidden'>
@@ -126,6 +127,26 @@
           <div id="food-items">
           </div>
 
+        </div>
+        <!-- Ai Agent Div -->
+        <div id="ai-agent-div" class = 'hidden'>
+          <div id="uploaded-photo-div">
+       
+            <button type="button" id="upload-photo-btn" class="overlay-btn">
+              <img id="uploaded-photo" src="" alt="Upload photo to analyze macros"></img>
+            </button>
+            
+          </div>
+          
+      
+          <input type="file" id="camera-input" accept="image/*" style="display: none;">
+          <div id="ai-response"></div>
+          <div>
+            <input type="text" id="meal-prompt" placeholder="Describe your meal"></input>
+            <button type= "button" id="submit-ai-request">Submit</button>
+          </div>
+          
+          
         </div>
 
         <div id="food-selected">

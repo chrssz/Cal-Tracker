@@ -9,6 +9,7 @@ async function checkAuth(){
         
         if(response.error){
             window.location.href = '/login.html';
+            return;
         }
 
         await clearUserMeals();
