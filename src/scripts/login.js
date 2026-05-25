@@ -20,7 +20,7 @@ document.getElementById("login-btn").addEventListener("click", async () => {
     try {
         console.log("Attempting login");
         const res = await apiPost('/auth/login', {username, password});
-        console.log(res);
+        
         if(res.error) {
             error.textContent = data.error || "Login failed.";
             return;

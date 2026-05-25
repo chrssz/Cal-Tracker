@@ -35,6 +35,10 @@ async function addUserMeals(meal){
 async function removeUserMeal(meal){
     return await apiDelete(`/meals/deleteMeal/${meal.meal_id}`)
 }
+/* A function that just performs clean on the database; Call it everytime app is visited */
+async function clearUserMeals(){
+    return await apiDelete('/meals/cleanup');
+}
 /* Food List */
 
 async function getUserFoods(){
@@ -54,5 +58,5 @@ export {
     setConsumed, setUserGoals, 
     getUserFoods, addUserFoods, removeUserFood, 
     getUserMeals, addUserMeals, removeUserMeal,
-    removeConsumed
+    removeConsumed, clearUserMeals
 };

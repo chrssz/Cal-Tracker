@@ -629,7 +629,9 @@ body {
   gap: 6px;
   padding-top: 8px;
 }
-
+#food-input.hidden{
+  display: none;
+}
 /*  Food Selected added to current meal  */
 #food-selected {
   display: flex;
@@ -866,6 +868,30 @@ body {
 }
 
 .user-input:focus { border-color: var(--accent); }
+
+
+/* Ai related Tab stuff */
+#ai-agent-div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+#ai-agent-div.hidden {
+  display: none;
+}
+#uploaded-photo-div{
+  
+  overflow: hidden;
+}
+
+#uploaded-photo{
+  border-radius: 6px;
+
+  max-width: 50%;
+  height: auto;
+}
+
 
 /*  Hidden  */
 .hidden { display: none; }
