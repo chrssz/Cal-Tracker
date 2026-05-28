@@ -121,32 +121,45 @@
           <button id ="foodList-btn" class="overlay-btn">Food Library</button>
           <button id="ai-btn" class="overlay-btn ai-btn">AI Analyzer</button>
         </div>
-
+        <!-- Food library -->
         <div id="food-list" class ='hidden'>
           <h3>Your Foods</h3>
+          <p class="set-info">Tap and Hold a food item to add to your meal.</p>
           <div id="food-items">
           </div>
 
         </div>
+        
         <!-- Ai Agent Div -->
         <div id="ai-agent-div" class = 'hidden'>
           <div id="uploaded-photo-div">
-       
-            <button type="button" id="upload-photo-btn" class="overlay-btn">
-              <img id="uploaded-photo" src="" alt="Upload photo to analyze macros"></img>
+            <button type="button" id="upload-photo-btn">
+              <img id="uploaded-photo" src="" alt="">
+              <div id="upload-placeholder">
+              <span id="upload-icon"></span>
+              <span id="upload-label">Tap to upload photo</span>
+              </div>
             </button>
-            
           </div>
-          
       
-          <input type="file" id="camera-input" accept="image/*" style="display: none;">
-          <div id="ai-response"></div>
-          <div>
-            <input type="text" id="meal-prompt" placeholder="Describe your meal"></input>
-            <button type= "button" id="submit-ai-request">Submit</button>
+          <!-- Loading Bar -->
+          <div id="ai-loading" class="hidden">
+            <div id="ai-loading-label">Analyzing your meal...</div>
+            <div id="ai-loading-track">
+              <div id="ai-loading-bar"></div>
+            </div>
           </div>
+
+          <input type="file" id="camera-input" accept="image/*" style="display: none;">
           
-          
+          <!-- AI Response -->
+          <div id="ai-response"></div>
+
+          <!-- Prompt + Submit -->
+          <div id="ai-input-row">
+            <input type="text" id="meal-prompt" placeholder="Describe your meal (optional)">
+            <button type="button" id="submit-ai-request" class="overlay-btn">Analyze</button>
+          </div>
         </div>
 
         <div id="food-selected">

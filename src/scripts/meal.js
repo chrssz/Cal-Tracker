@@ -121,35 +121,56 @@ function deleteButton(food) {
     
     return btn;
 }
+function generateId() {
+        return Date.now().toString(36) + Math.random().toString(36).slice(2);
+}
+
 async function saveMeal() {
-    /* Save this meal and its food contents */
-    /*Some call to the api here, for now local. */
     current_meal_name = document.getElementById("meal-name").value;
     close_meal_window();
-    
+
     const total = getTotalValue();
     const meal = {
-        name: current_meal_name || "Meal",  // meal name
-        foods: [...current_foods],             
-        calories: total.calories,                    
+        name: current_meal_name || "Meal",
+        foods: [...current_foods],
+        calories: total.calories,
         fats: total.fats,
         carbs: total.carbs,
-        protein: total.protein
+        protein: total.protein,
+        id: generateId(),
+        seconds: Date.now()
     };
-    
-    /* Notify the user data with this new meal. */
-    await addUserMeals(meal);
-    updateHistoryUi();
 
+    const existing_meals = JSON.parse(localStorage.getItem('meals') || '[]');
+    existing_meals.push(meal);
+    localStorage.setItem("meals", JSON.stringify(existing_meals));
+
+    const existing_consumed = JSON.parse(localStorage.getItem("consumed") || '{"calories":0,"fats":0,"carbs":0,"protein":0}');
+    localStorage.setItem("consumed", JSON.stringify({
+        calories: existing_consumed.calories + total.calories,
+        fats:     existing_consumed.fats     + total.fats,
+        carbs:    existing_consumed.carbs    + total.carbs,
+        protein:  existing_consumed.protein  + total.protein
+    }));
+
+    updateHistoryUi();
     clear_input();
     clear_meal_macros();
     clearMealInsertedFoods();
     clear_food();
-    
-    await setConsumed(total);
     renderAll();
 
+    try {
+        await addUserMeals(meal);
+    } catch(err) {
+        console.log(err);
+    }
 
+    try {
+        await setConsumed(total);
+    } catch(err) {
+        console.log(err);
+    }
 }
 
 function cancelMeal(){

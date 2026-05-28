@@ -1,80 +1,104 @@
-
 import { apiPost_ai } from "./api";
 import { add_input } from "./food_input";
+
 let file = null;
 
-function init_ai_gent_events(){
+function init_ai_agent_events() {
     init_upload_photo_button_event();
 }
 
-function init_upload_photo_button_event(){
-    
+function set_loading(is_loading) {
+    const btn = document.getElementById("submit-ai-request");
+    const loading = document.getElementById("ai-loading");
+    const response = document.getElementById("ai-response");
+
+    if(is_loading) {
+        btn.disabled = true;
+        loading.classList.remove("hidden");
+        response.innerHTML = "";
+    } else {
+        btn.disabled = false;
+        loading.classList.add("hidden");
+    }
+}
+
+function init_upload_photo_button_event() {
     const button = document.getElementById("upload-photo-btn");
     const cameraInput = document.getElementById("camera-input");
     const submitBtn = document.getElementById("submit-ai-request");
-    
-    button.addEventListener("click", ()=>{
+
+    button.addEventListener("click", () => {
         cameraInput.click();
     });
 
-    //Event when user snaps a photo
     cameraInput.addEventListener("change", async(event) => {
         file = event.target.files[0];
-    
-        if(!file){
-            console.log("Error processing file ");
-            document.getElementById("uploaded-photo").alt = "Error Uploading photo";
+        if(!file) {
+            document.getElementById("uploaded-photo").src = "";
             return;
         }
-
+        
         const imageURL = URL.createObjectURL(file);
-        //Update uploaded photo
         document.getElementById("uploaded-photo").src = imageURL;
-        
     });
 
-    //submitBtn Event
     submitBtn.addEventListener("click", async() => {
-        if(file === null){
-            const html = document.getElementById("ai-response");
-            html.innerHTML = "Error submitting Response";
-            const prompt = document.getElementById("meal-prompt").value = '';
+        if(file === null) {
+            set_error_message();
+            document.getElementById("ai-response").innerHTML = "Please upload a photo first.";
             return;
         }
-
         await send_request();
-        
     });
-
-    
 }
 
-async function send_request(){
-    console.log("Making api request");
-    const prompt = document.getElementById("meal-prompt")
-
+async function send_request() {
+    const prompt = document.getElementById("meal-prompt");
     const html = document.getElementById("ai-response");
-    const response = await apiPost_ai("/ai/getMacros", file, prompt.value);
-    if(!response){
-        return;
-    }
-    console.log(response);
-    html.innerHTML = `
-                        Meal: 
-                        Calories: ${response.meal.calories}, 
-                        Fats: ${response.meal.fats}
-                        Carbs: ${response.meal.carbs}
-                        Protein: ${response.meal.protein}
-                        
-                        `;
-    
-    response.meal.foods.forEach(item => {
-        add_input(item, 0);
-    });
-    prompt.value = '';
-    document.getElementById("uploaded-photo").src = "";
 
-    
+    set_loading(true);
+
+    try {
+        const response = await apiPost_ai("/ai/getMacros", file, prompt.value);
+
+        if(!response) {
+            html.innerHTML = "Something went wrong. Please try again.";
+            return;
+        }
+        if(response.error) {
+            html.innerHTML = response.error;
+            set_error_message();
+            return;
+        }
+        set_success_message();
+        html.innerHTML = `
+            Meal Successfully Analyzed.
+        `;
+
+        response.meal.foods.forEach(item => {
+            add_input(item, 0);
+        });
+
+        prompt.value = '';
+        document.getElementById("uploaded-photo").src = "";
+        file = null;
+
+    } catch(err) {
+        set_error_message();
+        html.innerHTML = err;
+    } finally {
+        set_loading(false);
+    }
 }
 
-export { init_ai_gent_events }
+function set_error_message(){
+    const div = document.getElementById("ai-response");
+    div.classList.remove('success');
+    div.classList.add('error');
+}
+function set_success_message(){
+    const div = document.getElementById("ai-response");
+    div.classList.remove('error');
+    div.classList.add('success');
+}
+export { init_ai_agent_events };

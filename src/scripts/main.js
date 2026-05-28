@@ -1,7 +1,7 @@
 import { renderAll, init_events} from "./uiRender";
 import { clearUserMeals } from "./user_info";
 import { apiGet, apiDelete } from "./api";
-
+import { startSync } from "./sync";
 async function checkAuth(){
     try {
        
@@ -11,16 +11,17 @@ async function checkAuth(){
             window.location.href = '/login.html';
             return;
         }
-
-        await clearUserMeals();
         
     } catch(error) {
         window.location.href = '/login.html';
     }
 }
 document.addEventListener("DOMContentLoaded", () => {
-    renderAll();
+    startSync();
     init_events();
+    
 });
 
 checkAuth();
+
+

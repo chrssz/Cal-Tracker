@@ -17,7 +17,7 @@ function init_form_events(){
 }
 /*  Functionality for save goal button */
 async function save_goal(){
-    const goal = await getUserGoals('save_goal');
+    const goal = JSON.parse(localStorage.getItem("goals"));
     const options_window = document.getElementById("options-window");
 
     userGoal_form.forEach(element => {
@@ -28,7 +28,9 @@ async function save_goal(){
     });
     
     await setUserGoals(goal);
-    set_default_goal(goal);
+    localStorage.setItem("goals", JSON.stringify(goal));
+
+    set_default_goal();
     renderAll();
     options_window.classList.remove("open");
 }
@@ -39,15 +41,16 @@ function cancel_goal(){
     options_window.classList.remove("open");
 }
 
-async function set_default_goal(goal) {
-    if(goal === null){
-        goal = await getUserGoals();
-    } 
+async function set_default_goal() {
+    
+    const goal = JSON.parse(localStorage.getItem("goals"));
+   
     userGoal_form.forEach(form => {
         const current = document.getElementById(form);
         let s = form.slice(4);
         current.value = goal[s];
     });
+    
 }
 
 export { init_form_events };
