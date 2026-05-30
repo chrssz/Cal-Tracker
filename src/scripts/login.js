@@ -18,17 +18,18 @@ document.getElementById("login-btn").addEventListener("click", async () => {
     }
 
     try {
-        console.log("Attempting login");
+       
         const res = await apiPost('/auth/login', {username, password});
         
         if(res.error) {
-            error.textContent = data.error || "Login failed.";
+            error.textContent = res.error || "Login failed.";
             return;
         }
 
         window.location.href = "/index.html";
 
     } catch(err) {
+        
         error.textContent = "Could not connect to server.";
     }
 });

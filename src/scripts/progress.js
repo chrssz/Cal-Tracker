@@ -1,32 +1,47 @@
-import {getUserGoals, getUserConsumed } from "./user_info.js";
-
 function renderBars(){
-    const progressBars = ["calorie-bar-fill", "fat-bar-fill", "carb-bar-fill", "protein-bar-fill"];
-    progressBars.forEach(element => {
-        updateFillSize(element);
-    });
+    updateFillSize();
+}
+function set_Consumed(new_consumed, increment = true){
+    const current = JSON.parse(localStorage.getItem("consumed"));
+    const sign = increment? 1 : -1;
+    for(let key in current){
+        if (current[key] == NaN){
+            current[key] = 0;
+            continue;
+        }
+        current[key] = Math.max(current[key] +  (sign * new_consumed[key]), 0);
+    }
+
+    localStorage.setItem("consumed", JSON.stringify(current));
 }
 
-async function updateFillSize(bar){
-    // bar: [Goals, CurrentUserConsumed]
-    const {calories, carbs, fats, protein} = await getUserConsumed();
-    const {calories: goal_cals, fats: goal_fats, carbs: goal_carbs, protein: goal_protein} = await getUserGoals();
+function updateFillSize(){
+    const {calories, carbs, fats, protein} = JSON.parse(localStorage.getItem("consumed"));
+
+    const {calories: goal_cals, fats: goal_fats, carbs: goal_carbs, protein: goal_protein} = JSON.parse(localStorage.getItem("goals"));
     const bar_to_label = {
         "calorie-bar-fill": [calories, goal_cals],
         "carb-bar-fill": [carbs, goal_carbs],
         "fat-bar-fill": [fats, goal_fats],
         "protein-bar-fill": [protein, goal_protein],
     }
-    const [user_consumed, user_goals] = bar_to_label[bar];
-   
-    let current = document.getElementById(bar);
-    const percent = Math.min(((user_consumed / user_goals ) * 100), 100);
-    current.style.width = percent + '%';
 
-    updateProgressText(bar, user_consumed, user_goals)
+    for(let key in bar_to_label){
+        
+        const bar = document.getElementById(key);
+   
+        const [user_consumed, user_goals] = bar_to_label[key];
+ 
+        const percent = Math.min(((user_consumed / user_goals ) * 100), 100);
+        bar.style.width = percent + '%';
+
+        updateProgressText(key, user_consumed, user_goals);
+
+    }
+    
 }
 
-function updateProgressText(bar, userConsumed, userGoals){
+function updateProgressText(bar_name, userConsumed, userGoals){
     const bar_to_label = {
         "calorie-bar-fill": ["calories-consumed", "calories-goal"],
         "carb-bar-fill": ["carb-consumed", "carb-goal"],
@@ -34,7 +49,7 @@ function updateProgressText(bar, userConsumed, userGoals){
         "protein-bar-fill": ["protein-consumed", "protein-goal"]
     }
 
-    const [consumed, goal] = bar_to_label[bar];
+    const [consumed, goal] = bar_to_label[bar_name];
   
     let consumedText = document.getElementById(consumed);
     let goalText = document.getElementById(goal);
@@ -43,4 +58,4 @@ function updateProgressText(bar, userConsumed, userGoals){
     goalText.innerText = userGoals;
 }
 
-export {renderBars};
+export {renderBars, set_Consumed};

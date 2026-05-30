@@ -2,7 +2,12 @@ import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
-  base: '/Cal-Tracker/',
+  server:{
+    allowedHosts: [
+      'http://codexr.dev',
+      'http://www.codexr.dev'
+    ]
+  },
   plugins: [
     VitePWA({
       registerType: 'autoUpdate',
