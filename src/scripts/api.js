@@ -1,5 +1,4 @@
-const BASE_URL = "http://192.168.1.106:3000";
-const LOCAL_URL = 'http://localhost:3000';
+const BASE_URL = "http://nutri.codexr.dev";
 async function apiGet(endPoint){
     const response = await fetch(`${BASE_URL}${endPoint}`, {
         credentials: 'include'

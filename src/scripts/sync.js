@@ -6,6 +6,7 @@ let SYNC_INTERVAL = 5 * 60 * 1000;
 async function sync(){
     try
     {
+        
         const response = await apiGet('/sync/getSync');
         if(!response){
             return;
