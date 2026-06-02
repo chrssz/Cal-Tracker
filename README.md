@@ -1,5 +1,5 @@
 # Cal Tracker
-
+# Live App Link: https://nutri.codexr.dev
 A progressive web app for tracking daily calorie and macro intake. Installable on mobile devices without an app store.
 
 ---
@@ -82,3 +82,15 @@ Open `http://localhost:5173`
 
 <p>Saved meal, with history overview of today's consumed meal</p>
 <img width="391" height="844" alt="SavedLunchWithHistoryShowcase" src="https://github.com/user-attachments/assets/6730868c-1b90-4188-bdb5-f26859e3c147" />
+
+<p>Ai Analyzer</p>
+<img width="1920" height="907" alt="Ai Analyzer" src="https://github.com/user-attachments/assets/47396d61-26d2-4364-8c08-fb22c8e2001a" />
+
+<p>Choose to upload a existing photo, or take one. Encourage accuracy by providing a description</p>
+<img width="1920" height="907" alt="Ai Analyzer Pt2" src="https://github.com/user-attachments/assets/20d2fbb8-eb53-415e-805b-bc9603596442" />
+
+<p>Ai will anaylze the contents</p>
+<img width="1920" height="907" alt="Ai Analyzer Pt3" src="https://github.com/user-attachments/assets/d7dfed1b-aa8b-479e-a0ea-baead97cf3aa" />
+
+<p>AI Results!</p>
+<img width="1920" height="907" alt="Ai Analyzer Pt4" src="https://github.com/user-attachments/assets/12b3f7f4-e910-456c-a4a9-7a600848ca18" />
