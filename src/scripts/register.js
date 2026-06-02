@@ -26,10 +26,12 @@ document.getElementById("register-btn").addEventListener("click", async () => {
     }
 
     try {
-        const response = apiPost('/auth/register');
+        const data = {username, password};
+       
+        const response = await apiPost('/auth/register', data);
         
-        if(!response.ok) {
-            error.textContent = data.error || "Registration failed.";
+        if(response.error) {
+            error.textContent = response.error || "Registration failed.";
             return;
         }
 

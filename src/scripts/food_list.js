@@ -1,30 +1,41 @@
 /* Renders and handles input for food_list */
-import { removeUserFood } from "./user_info";
+import { removeUserFood, addUserFoods } from "./user_info";
 
 import { addFood } from "./meal";
 
-const food_list = [];
 
 function init_food_list_buttons(){
     init_gram_add_cancel();
     init_tabs();
     update_food_list();
 }
-function add_food_list(food){
-   
-    food_list.append(food);
+async function add_food_list(food){
+    const food_list = JSON.parse(localStorage.getItem("food-list") || "[]");
+    food_list.push(food);
+
     localStorage.setItem("food-list", JSON.stringify(food_list));
 
     update_food_list();
+
+    try{
+        const response = await addUserFoods(food);
+        if(response.error){
+            return;
+        }
+
+    } catch(err){
+        console.log(err);
+    }
 }
 function remove_food_list(food){
     const new_food_list = [];
-    new_food_list.forEach(item => {
+    const current = JSON.parse(localStorage.getItem("food-list") || "[]");
+    current.forEach(item => {
         if(item.id !== food.id){
-            new_food_list.append(item);
+            new_food_list.push(item);
         }
     });
-
+    
     localStorage.setItem("food-list", JSON.stringify(new_food_list));
 
     update_food_list();
@@ -163,8 +174,8 @@ class FoodListItem {
         new_div.addEventListener("pointerup", () => clearTimeout(hold_timer));
         new_div.addEventListener("pointerleave", () => clearTimeout(hold_timer));
 
-        new_div.append(foodname_div);
-        new_div.append(info_div);
+        new_div.appendChild(foodname_div);
+        new_div.appendChild(info_div);
 
         this.div = new_div;
         return new_div;

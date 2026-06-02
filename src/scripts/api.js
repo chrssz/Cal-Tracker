@@ -1,67 +1,78 @@
-const BASE_URL = "http://nutri.codexr.dev";
-async function apiGet(endPoint){
-    const response = await fetch(`${BASE_URL}${endPoint}`, {
-        credentials: 'include'
-    });
+const BASE_URL = "";
 
-    if(response.status == 401) {
-        window.location.href = '/login.html';
-        return;
+async function handleResponse(response, skipRedirect = false) {
+    if (response.status === 401) {
+        if(!skipRedirect) {
+            window.dispatchEvent(new Event('unauthorized'));
+            window.location.href = '/login.html';
+        }
+        return { error: 'Unauthorized' };
     }
-
+    if (!response.ok) {
+        console.error(`HTTP Error Status: ${response.status}`);
+        throw new Error(`Server returned status ${response.status}`);
+    }
     return response.json();
 }
 
-async function apiPost(endPoint, data){
-    const response = await fetch(`${BASE_URL}${endPoint}`, {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        credentials: 'include',
-        body: JSON.stringify(data)
-    });
-
-    if(response.status == 401) {
-        window.location.href = '/login.html';
-        return;
+async function apiGet(endPoint, skipRedirect = false) {
+    try {
+        const response = await fetch(`${BASE_URL}${endPoint}`, {
+            credentials: 'include'
+        });
+        return await handleResponse(response, skipRedirect);
+    } catch (err) {
+        console.error("GET request failed:", err);
+        return null; 
     }
-    
-    return response.json();
-
 }
 
-async function apiDelete(endPoint, data) {
-    const response = await fetch(`${BASE_URL}${endPoint}`, {
-        method: 'DELETE',
-        headers: {'Content-Type': 'application/json'},
-        credentials: 'include',
-        body: JSON.stringify(data)
-    });
-
-    if(response.status == 401) {
-        window.location.href = '/login.html';
-        return;
+async function apiPost(endPoint, data, skipRedirect = false) {
+    try {
+        const response = await fetch(`${BASE_URL}${endPoint}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify(data)
+        });
+        return await handleResponse(response, skipRedirect);
+    } catch (err) {
+        console.error("POST request failed:", err);
+        return null;
     }
-    
-    return response.json();
 }
 
-async function apiPost_ai(endPoint, data){
-    const formData = new FormData();
-    formData.append("photo", data);
-
-    const response = await fetch(`${BASE_URL}${endPoint}`, {
-        method: "POST",
-        body: formData,
-        credentials: "include"
-    });
-
-    if(response.status == 401) {
-        window.location.href = '/login.html';
-        return;
+async function apiDelete(endPoint, data, skipRedirect = false) {
+    try {
+        const response = await fetch(`${BASE_URL}${endPoint}`, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify(data)
+        });
+        return await handleResponse(response, skipRedirect);
+    } catch (err) {
+        console.error("DELETE request failed:", err);
+        return null;
     }
+}
 
-    return response.json();
+async function apiPost_ai(endPoint, data, prompt, skipRedirect = false) {
+    try {
+        const formData = new FormData();
+        
+        formData.append("photo", data);
+        formData.append("prompt", prompt);
+        const response = await fetch(`${BASE_URL}${endPoint}`, {
+            method: "POST",
+            body: formData,
+            credentials: "include"
+        });
+        return await handleResponse(response, skipRedirect);
+    } catch (err) {
+        console.error("AI POST request failed:", err);
+        return null;
+    }
 }
-export { apiPost, apiGet, apiDelete,
-         apiPost_ai
-}
+
+export { apiPost, apiGet, apiDelete, apiPost_ai };

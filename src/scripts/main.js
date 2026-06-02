@@ -1,27 +1,31 @@
-import { renderAll, init_events} from "./uiRender";
-import { clearUserMeals } from "./user_info";
+import { init_events} from "./uiRender";
 import { apiGet, apiDelete } from "./api";
 import { startSync } from "./sync";
-async function checkAuth(){
+async function checkAuth() {
     try {
-       
-        const response = await apiGet('/auth/check');
-        
-        if(response.error){
+        const res = await apiGet('/auth/check', true); 
+        if(res.error) {
+            
+            console.log(`Response error: ${res.error}`); 
             window.location.href = '/login.html';
-            return;
+            return false;
         }
-        
-    } catch(error) {
+    } catch(err) {
+        console.log(`Response caught error: ${err}`);
         window.location.href = '/login.html';
+        return false;
     }
+
+    return true;
 }
-document.addEventListener("DOMContentLoaded", () => {
-    startSync();
+document.addEventListener("DOMContentLoaded", async() => {
+    const authenticated = await checkAuth();
+    if(!authenticated) {
+        return;
+    }
+    await startSync();
     init_events();
     
 });
-
-checkAuth();
 
 

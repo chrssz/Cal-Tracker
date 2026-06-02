@@ -26,10 +26,11 @@ document.getElementById("login-btn").addEventListener("click", async () => {
             return;
         }
 
-        window.location.href = "/index.html";
-
+        location.href = './index.html';
     } catch(err) {
         
         error.textContent = "Could not connect to server.";
+        return;
     }
+
 });

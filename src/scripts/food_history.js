@@ -1,4 +1,4 @@
-import { getUserMeals, removeUserMeal, removeConsumed } from "./user_info";
+import { removeUserMeal, removeConsumed } from "./user_info";
 import { renderAll } from "./uiRender";
 import { set_Consumed } from "./progress";
 

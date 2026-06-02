@@ -78,7 +78,7 @@ function updateMealInsertedFoods(){
 
         const delete_button = deleteButton(element);
 
-        new_div.append(delete_button);
+        new_div.appendChild(delete_button);
         new_div.appendChild(added_food_name_div);
         new_div.appendChild(added_food_info_div);
 

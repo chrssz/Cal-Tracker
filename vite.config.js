@@ -2,18 +2,37 @@ import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
-  server:{
-    allowedHosts: [
-      'http://codexr.dev',
-      'http://www.codexr.dev'
-    ]
+  build:{
+    rollupOptions:{
+      input:{
+        main: 'index.html',
+        login: 'login.html',
+        register: 'register.html'
+      }
+    }
   },
+
+  server:{
+    host: "0.0.0.0",
+    port: 80,
+    strictPort: true,
+    allowedHosts: ['client', 'nutri.codexr.dev']
+  
+    
+  },
+  preview: {
+    host: "0.0.0.0",
+    port: 80,         // Make sure this matches the port your Dockerfile exposes
+    strictPort: true,
+    allowedHosts: ['client, nutri.codexr.dev']
+  },
+
   plugins: [
     VitePWA({
       registerType: 'autoUpdate',
       manifest: {
-        name: 'Cal Tracker',
-        short_name: 'CalTracker',
+        name: 'Nutri Tracker',
+        short_name: 'Nutri Tracker',
         description: 'A calorie tracking app',
         theme_color: '#ffffff',
         icons: [
