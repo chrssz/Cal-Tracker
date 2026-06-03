@@ -1,3 +1,4 @@
+const BASE_URL = "http://localhost:3000";
 
 async function handleResponse(response, skipRedirect = false) {
     if (response.status === 401) {
