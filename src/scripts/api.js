@@ -1,4 +1,3 @@
-const BASE_URL = "";
 
 async function handleResponse(response, skipRedirect = false) {
     if (response.status === 401) {
@@ -15,10 +14,19 @@ async function handleResponse(response, skipRedirect = false) {
     return response.json();
 }
 
+function getTimeZone(){
+    return Intl.DateTimeFormat().resolvedOptions().timeZone;
+}
+
 async function apiGet(endPoint, skipRedirect = false) {
     try {
         const response = await fetch(`${BASE_URL}${endPoint}`, {
-            credentials: 'include'
+            method: 'GET',
+            credentials: 'include',
+            headers: { 
+                'Content-Type': 'application/json', 
+                'time-zone': getTimeZone() 
+            }
         });
         return await handleResponse(response, skipRedirect);
     } catch (err) {
@@ -31,8 +39,11 @@ async function apiPost(endPoint, data, skipRedirect = false) {
     try {
         const response = await fetch(`${BASE_URL}${endPoint}`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
+            headers: { 
+                'Content-Type': 'application/json', 
+                'time-zone': getTimeZone() 
+            },
             body: JSON.stringify(data)
         });
         return await handleResponse(response, skipRedirect);
@@ -46,8 +57,11 @@ async function apiDelete(endPoint, data, skipRedirect = false) {
     try {
         const response = await fetch(`${BASE_URL}${endPoint}`, {
             method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
+            headers: { 
+                'Content-Type': 'application/json', 
+                'time-zone': getTimeZone() 
+            },
             body: JSON.stringify(data)
         });
         return await handleResponse(response, skipRedirect);
@@ -60,13 +74,16 @@ async function apiDelete(endPoint, data, skipRedirect = false) {
 async function apiPost_ai(endPoint, data, prompt, skipRedirect = false) {
     try {
         const formData = new FormData();
-        
         formData.append("photo", data);
         formData.append("prompt", prompt);
+
         const response = await fetch(`${BASE_URL}${endPoint}`, {
             method: "POST",
-            body: formData,
-            credentials: "include"
+            credentials: "include",
+            headers: { 
+                'time-zone': getTimeZone() 
+            },
+            body: formData
         });
         return await handleResponse(response, skipRedirect);
     } catch (err) {

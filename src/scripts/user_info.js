@@ -53,10 +53,15 @@ async function removeUserFood(food){
     return await apiDelete(`/food-list/deleteFood/${food.id}`);
 }
 
+async function syncData() {
+    return await apiGet('/sync/getSync', true);
+}
+
 export {
     getUserGoals, getUserConsumed, 
     setConsumed, setUserGoals, 
     getUserFoods, addUserFoods, removeUserFood, 
     getUserMeals, addUserMeals, removeUserMeal,
-    removeConsumed, clearUserMeals
+    removeConsumed, clearUserMeals,
+    syncData
 };

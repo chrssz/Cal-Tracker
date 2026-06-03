@@ -1,13 +1,13 @@
-import { apiGet } from "./api.js";
-import { renderAll } from "./uiRender.js";
+import { renderAll} from "./uiRender.js";
 import { updateHistoryUi } from "./food_history.js";
-
+import { syncData } from "./user_info.js";
 const SYNC_INTERVAL = 5 * 60 * 1000;
 let syncTimer = null;
 
 async function sync() {
     try {
-        const response = await apiGet('/sync/getSync', true); 
+     
+        const response = await syncData(); 
         if(!response || response.error) {
             stopSync(); 
             return;
