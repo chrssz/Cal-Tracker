@@ -7,9 +7,8 @@ async function updateHistoryUi() {
     if (!history_container) return;
 
     history_container.innerHTML = "";
-  
+    
     const user_meals = JSON.parse(localStorage.getItem("meals") || "[]");
-
     if (user_meals.length === 0) {
         const empty = document.createElement("div");
         empty.classList.add("history-empty");
@@ -19,15 +18,18 @@ async function updateHistoryUi() {
     }
     
     user_meals.forEach((meal, index) => {
+        
         const history_panel = new HistoryPanel(meal, index);
         history_container.appendChild(history_panel.get_div_element());
+        
     });
 }
 function removeMealLocalStorage(meal) {
     const user_meals = JSON.parse(localStorage.getItem("meals") || "[]");;
     const new_meals = [];
+    
     user_meals.forEach(item => {
-        if(item.id !== meal.id){
+        if(item.meal_id !== meal.meal_id){
             new_meals.push(item);
         }
     });
@@ -38,11 +40,11 @@ function removeMealLocalStorage(meal) {
 class HistoryPanel {
     constructor(meal, mealIndex) {
         this.meal = meal;
-        this.foods = meal.foods;   // ← extract foods from meal object
-        this.name = meal.name;     // ← extract name from meal object
+        this.foods = meal.foods;  
+        this.name = meal.name;     
         this.index = mealIndex;
         this.div = null;
-        this.total = {calories: 0, fats: 0, carbs: 0, protein: 0};
+        this.total = {calories: meal['calories'], fats: meal['fats'], carbs: meal['carbs'], protein: meal['protein']};
     }
 
     get_div_element() {
@@ -51,7 +53,6 @@ class HistoryPanel {
         const panel = document.createElement("div");
         panel.classList.add("history-panel");
 
-        /* ---------- Header ---------- */
         const header = document.createElement("div");
         header.classList.add("history-panel-header");
 
@@ -71,16 +72,8 @@ class HistoryPanel {
         const foods_container = document.createElement("div");
         foods_container.classList.add("history-foods-container");
 
-        let total_calories = 0;
-        let total_carbs = 0;
-        let total_fats = 0;
-        let total_protein = 0;
-
         this.foods.forEach(food => {
-            total_calories += food.calories || 0;
-            total_carbs += food.carbs || 0;
-            total_fats += food.fats || 0;
-            total_protein += food.protein || 0;
+            
 
             const food_item = document.createElement("div");
             food_item.classList.add("history-food-item");
@@ -93,28 +86,24 @@ class HistoryPanel {
             food_info.classList.add("history-food-info");
             food_info.innerHTML =
                 `${food.calories} cal • ` +
-                `P:${food.protein}g • ` +
+                `F:${food.fats}g • ` +
                 `C:${food.carbs}g • ` +
-                `F:${food.fats}g`;
+                `P:${food.protein}g`;
 
             food_item.appendChild(food_name);
             food_item.appendChild(food_info);
             foods_container.appendChild(food_item);
 
-
         });
-        this.total.calories = total_calories;
-        this.total.fats = total_fats;
-        this.total.carbs = total_carbs;
-        this.total.protein = total_protein;
+       
 
         const totals = document.createElement("div");
         totals.classList.add("history-total-macros");
         totals.innerHTML =
-            `${total_calories} cal • ` +
-            `P:${total_protein}g • ` +
-            `C:${total_carbs}g • ` +
-            `F:${total_fats}g`;
+            `${this.total["calories"]} cal • ` +
+            `F:${this.total["fats"]}g • ` +
+            `C:${this.total["carbs"]}g • ` +
+            `P:${this.total["protein"]}g`;
 
         panel.appendChild(header);
         panel.appendChild(foods_container);
@@ -126,9 +115,10 @@ class HistoryPanel {
     
     async remove_meal() {
         removeMealLocalStorage(this.meal);
+        console.log(this.total);
         set_Consumed(this.total, false);
         
-
+        
         if (this.div != null){this.div.remove()};
         updateHistoryUi();
         renderAll();
@@ -138,23 +128,9 @@ class HistoryPanel {
                 console.log(`${response.error}`);
             }
 
-            
-
         } catch(err){
             console.log(err);
         }
-        
-        try{
-            const response = await removeConsumed(this.foods);
-            if(response.error){
-                console.log(response.error);
-            }
-            
-        }catch(err){
-            console.log(err);
-        }
-        
-       
         
     }
 }

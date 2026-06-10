@@ -1,18 +1,23 @@
+import { setConsumed } from "./user_info";
+
 function renderBars(){
     updateFillSize();
 }
-function set_Consumed(new_consumed, increment = true){
-    const current = JSON.parse(localStorage.getItem("consumed"));
-    const sign = increment? 1 : -1;
-    for(let key in current){
-        if (current[key] == NaN){
-            current[key] = 0;
-            continue;
-        }
-        current[key] = Math.max(current[key] +  (sign * new_consumed[key]), 0);
-    }
+const MACROS = ["calories", "fats", "carbs", "protein"];
+
+async function set_Consumed(new_consumed, add=true) {
+  
+    const current = JSON.parse(localStorage.getItem("consumed")) || {};
+    const isAdd = add ? 1 : -1;
+    
+    MACROS.forEach(macro => {
+        current[macro] = Math.max(current[macro] + (isAdd * (new_consumed[macro] || 0)), 0);
+    });
 
     localStorage.setItem("consumed", JSON.stringify(current));
+    renderBars();
+    
+    await setConsumed(current);
 }
 
 function updateFillSize(){

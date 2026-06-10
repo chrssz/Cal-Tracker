@@ -1,5 +1,7 @@
 import { apiPost_ai } from "./api";
-import { add_input } from "./food_input";
+function add_input(){
+    //dummy function so program can run for now
+}
 let file = null;
 function init_ai_agent_events() {
     init_upload_photo_button_event();

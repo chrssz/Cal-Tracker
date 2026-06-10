@@ -1,11 +1,10 @@
 import { renderBars } from "./progress.js";
-import { init_form_events } from "./goalForms.js";
-import { init_food_input_events } from "./food_input.js";
-import { init_meal_events } from "./meal.js";
-import { init_food_list_buttons } from "./food_list.js";
 import { apiPost } from "./api.js";
 import { updateHistoryUi } from "./food_history.js";
+
 import { init_ai_agent_events } from "./ai_agent.js";
+import { MealModal } from "../assets/meal-modal.js";
+import { OptionsModal } from "../assets/options-modal.js";
 //Will render all components in document
 function renderAll()
 {
@@ -14,15 +13,10 @@ function renderAll()
 }
 function init_events()
 {
-    init_form_events();
     init_options_event();
     init_log_meal_event();
-    init_food_input_events();
-    init_meal_events();
-    init_food_list_buttons();
     init_logout_event();
-    init_ai_agent_events();
-    updateHistoryUi();
+  
 }
 
 function renderDate()
@@ -58,16 +52,17 @@ function init_options_event(){
     const btn = document.getElementById("options-button");
 
     btn.addEventListener("click", () => {
-        const options_window = document.getElementById("options-window");
-        options_window.classList.add("open");
+        const div = new OptionsModal();
+        div.turn_on();
     });
 }
 
 function init_log_meal_event() {
+   
     const btn = document.getElementById("log-meal-button");
     btn.addEventListener("click", () =>{
-        const window = document.getElementById("add-meal-container");
-        window.classList.add("open");
+        const div = new MealModal();
+        div.turn_on();
     });
 }
 

@@ -49,8 +49,8 @@ async function addUserFoods(food){
     return await apiPost('/food-list/postFoodList', food);
 }
 
-async function removeUserFood(food){
-    return await apiDelete(`/food-list/deleteFood/${food.id}`);
+async function removeUserFood(foodArr){
+    return await apiDelete('/food-list/deleteFoods', foodArr);
 }
 
 async function syncData() {

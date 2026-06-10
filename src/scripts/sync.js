@@ -12,7 +12,7 @@ async function sync() {
             stopSync(); 
             return;
         }
-
+        
         localStorage.setItem("goals", JSON.stringify(response.goals));
         localStorage.setItem("consumed", JSON.stringify(response.consumed));
         localStorage.setItem("meals", JSON.stringify(response.meals));
