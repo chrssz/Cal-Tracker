@@ -2,6 +2,9 @@
 # Live App Link: https://nutri.codexr.dev
 A progressive web app for tracking daily calorie and macro intake. Installable on mobile devices without an app store.
 
+## ⚠️ Important
+Screenshots below are outdated. Please visit the live website to see the latest UI. The README will be updated soon.
+
 ---
 ## Features
 
