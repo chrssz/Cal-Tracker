@@ -49,44 +49,32 @@ export class FoodItemPanel {
 
     get_div() {
         const div = document.createElement("div");
-
         div.classList.add("food-list-item");
-
         div.innerHTML = `
-            <div class="added-food-name">${this.base_data.name}</div>
-
-            <div class="added-food-info">
-                ${this.base_data.calories}cal • 
-                F:${this.base_data.fats}g • 
-                C:${this.base_data.carbs}g • 
-                P:${this.base_data.protein}g
+            <div class="food-item-top">
+                <div class="added-food-name">${this.base_data.name}</div>
+                <div class="selection-circle hidden">
+                    <span class="checkmark">✓</span>
+                </div>
             </div>
-
+            <div class="added-food-info">${this.base_data.calories} calories per serving</div>
+            <div class="food-macros-row">
+                <span class="macro-pill">Fats: ${this.base_data.fats}g</span>
+                <span class="macro-pill">Carbs: ${this.base_data.carbs}g</span>
+                <span class="macro-pill">Protein: ${this.base_data.protein}g</span>
+            </div>
             ${this.gramOptions ? `
                 <div class="food-actions">
-                    <input
-                        class="serving-input"
-                        type="number"
-                        value="1"
-                        min="0"
-                        step="0.25"
-                    >
-
+                    <input class="serving-input" type="number" value="1" min="0" step="0.25">
                     <select class="serving-dropdown">
                         <option value="servings">servings</option>
                         <option value="grams">grams</option>
                     </select>
                 </div>
             ` : ""}
-
-            <div class="selection-circle hidden">
-                <span class="checkmark">✓</span>
-            </div>
         `;
-
         return div;
     }
-
     #handle_click(div) {
 
         this.isSelected = !this.isSelected;

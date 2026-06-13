@@ -403,48 +403,68 @@ body {
 #goal-option-buttons button { flex: 1; padding: 10px; }
 
 .added-food-name {
-  font-size: 13px;
-  font-weight: 600;
-  text-align: center;
-  color: var(--text-primary);
-  
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    flex: 1;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
+
 
 .added-food-info {
-  font-size: 13px;
-  color: var(--label-color);
-  text-align: center;
-  font-weight: 500;
+    font-size: 12px;
+    color: var(--label-color);
 }
 
+.food-macros-row {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 2px;
+}
+.macro-pill {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 99px;
+    background: var(--section-header-bg);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+}
 /*  Food List Item base  */
 .food-list-item {
-  display: flex;
-  flex-direction: row;
-  gap: 8px;
-
-  border-radius: var(--radius-inner);
-  background: var(--main-bg-color);
-  border: 1px solid var(--border);
-
-  padding: 12px; 
-  
-  cursor: pointer;
-  transition: background 0.15s, box-shadow 0.15s, transform 0.1s;
-
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    border-radius: var(--radius-inner);
+    background: var(--main-bg-color);
+    border: 1px solid var(--border);
+    padding: 14px 16px;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+    transition: background 0.15s, box-shadow 0.15s, transform 0.1s;
 }
 
 .food-list-item:hover {
-  background-color: var(--btn-background-hover);
-  box-shadow: var(--shadow-hover);
-  transform: translateY(-1px);
+    background: var(--btn-background-hover);
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-1px);
 }
 
-
 .food-list-item.selected {
-  background-color: var(--meal-food-select);
-  border-color: #b1b1b1;
-  box-shadow: var(--shadow-card);
+    background: #eef3ff;
+    border-color: #c0d0f5;
+}
+
+.food-item-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
 }
 
 
@@ -664,7 +684,7 @@ body.modal-open {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 16px;
+  padding: 25px 20px;
   background-color: var(--main-bg-color);
   border-bottom: 1px solid var(--border);
   
@@ -678,7 +698,7 @@ body.modal-open {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 16px;
+  padding: 25px 16px;
   background-color: var(--main-bg-color);
   border-top: 1px solid var(--border);
   position: sticky;
@@ -689,7 +709,7 @@ body.modal-open {
 .modal-window footer #cancel,
 .modal-window footer #save{
   opacity: 1;
-  transform: translateY(120%);
+  transform: translateY(150%);
   overflow: hidden;
   transition: opacity 0.2s ease, transform 0.2s ease;
   pointer-events: none;
@@ -709,8 +729,6 @@ body.modal-open {
   flex: 1;
   overflow-y: auto;
 }
-
-
 .modal-window .meal-name-input input {
   border: none;
   border-bottom: 1px solid var(--border-strong);
@@ -722,7 +740,11 @@ body.modal-open {
   color: var(--text-secondary);
   width: 100%;
 }
-
+.modal-window header #go-back,
+.modal-window header #options {
+  font-size: 21px;
+  
+}
 .modal-window button {
   background: none;
   border: none;
@@ -736,6 +758,7 @@ body.modal-open {
 
 .modal-window button:hover {
   background: var(--btn-background-hover);
+  
 }
 
 .modal-window span {
@@ -785,26 +808,33 @@ body.modal-open {
   transform: translateX(-150%) translateY(0);
   transition: transform ease-out 0.3s;
 }
-.food-actions{
-  display:flex;
-  flex-direction: row;
-  gap:8px;
-  margin-top:8px;
-  margin-left: auto;
-  
+.food-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+  align-items: center;
 }
-.serving-input{
-  width:50px;
-  border:none;
-  border-radius:999px;
-  padding:5px 8px;
-  text-align:center;
+.serving-input {
+  width: 64px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-inner);
+  padding: 5px 8px;
+  font-size: 13px;
+  text-align: center;
+  color: var(--text-primary);
+  background: var(--section-header-bg);
+  outline: none;
 }
 
-.serving-dropdown{
-  border:none;
-  border-radius:999px;
-  padding:8px 12px;
+.serving-dropdown {
+  flex: 1;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-inner);
+  padding: 5px 8px;
+  font-size: 13px;
+  color: var(--text-primary);
+  background: var(--section-header-bg);
+  outline: none;
 }
 .options-menu{
   position: absolute;
@@ -825,7 +855,7 @@ body.modal-open {
   z-index: 1000;
 
   overflow:hidden;
-
+  padding: 8px 12px;
   animation: fadeIn 0.15s ease;
 }
 
@@ -858,18 +888,24 @@ body.modal-open {
 }
 
 .selection-circle {
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
-  border: 1.5px solid var(--border-strong); 
-  background: transparent;
+  border: 1.5px solid var(--border-strong);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: background 0.18s, border-color 0.18s;
-  margin-left: auto;
+  background: var(--section-header-bg);
+  transition: background 0.15s, border-color 0.15s;
 }
+.checkmark {
+  font-size: 12px;
+  color: white;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
 .selection-circle .checkmark {
   opacity: 0;
   transform: scale(0.5);
@@ -883,13 +919,14 @@ body.modal-open {
 .food-list-item.selected .selection-circle .hidden{
   display: none;
 }
+
 .food-list-item.selected .selection-circle {
-  background: #0A84FF;   /* Apple blue */
-  border-color: #0A84FF;
+  background: var(--accent);
+  border-color: var(--accent);
 }
+
 .food-list-item.selected .checkmark {
   opacity: 1;
-  transform: scale(1);
 }
 
 .modal-window-content .calorie-goals{
@@ -962,9 +999,9 @@ input[type=number] {
 }
 
 .food-input-card .input-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
 }
 
 .food-input-card .input-field {
