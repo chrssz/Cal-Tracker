@@ -1,4 +1,5 @@
 
+import { AiAnalyzerModal } from "./ai-analyzer-modal";
 import { generateId } from "./helper/crypto";
 
 export class FoodInputCard {
@@ -9,9 +10,26 @@ export class FoodInputCard {
         this.save_food_input_handler = null;
         this.cancel_food_input_handler = null;
 
+        this.lock_screen();
         this.init_events();
     }
-
+    lock_screen(){
+        if(this.lock){
+            document.querySelector(".modal-lock").remove();
+        }
+        const lock = document.createElement("div");
+        lock.classList.add("modal-lock");
+        lock.appendChild(this.div);
+        document.body.appendChild(lock);
+                
+        this.lock = lock;
+    }
+    unlock_screen(){
+        if(this.lock){
+            document.querySelector(".modal-lock").remove();
+        }
+        this.lock = null;
+    }
     get_div() {
         const div = document.createElement("div");
         div.classList.add("food-input-card");
@@ -98,7 +116,24 @@ export class FoodInputCard {
         this.div.querySelector("#cancel-food-input").addEventListener("click", this.cancel_food_input_handler);
 
         this.ai_handler_ref = () =>{
-            this.set_error("AI Features not available yet. Refactoring Code.");
+            const analyzer = new AiAnalyzerModal((foods) => {
+                console.log(`Callback from ai analyzer in food-input : ${foods}`);
+                foods.forEach(food => {
+                    // populate the input fields with first food
+                    
+                    this.div.querySelector('#food-input-name').value = food.name;
+                    this.div.querySelector('#food-input-cals').value = food.calories;
+                    this.div.querySelector('#food-input-fats').value = food.fats;
+                    this.div.querySelector('#food-input-carbs').value = food.carbs;
+                    this.div.querySelector('#food-input-protein').value = food.protein;
+                    this.div.querySelector('#food-input-serving').value = food.grams;
+
+                });
+                this.lock_screen();
+            });
+            
+            this.unlock_screen();
+            analyzer.turn_on();
         }
 
         this.div.querySelector("#ai").addEventListener("click",this.ai_handler_ref);
@@ -114,6 +149,9 @@ export class FoodInputCard {
         if(this.cancel_food_input_handler){
             document.removeEventListener("click", this.cancel_food_input_handler);
         }
+        if(this.lock){
+            this.unlock_screen();
+        }
         this.div.remove();
     }
 
@@ -123,4 +161,6 @@ export class FoodInputCard {
             this.div.querySelector("#error-msg").innerHTML = '';
         }, 7000);
     }
+
+    
 }

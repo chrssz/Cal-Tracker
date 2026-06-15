@@ -75,7 +75,14 @@ async function apiDelete(endPoint, data, skipRedirect = false) {
 async function apiPost_ai(endPoint, data, prompt, skipRedirect = false) {
     try {
         const formData = new FormData();
-        formData.append("photo", data);
+
+       
+        data.forEach((blob, index) => {
+            
+            formData.append("photo", blob, `meal_photo_${index}.jpg`);
+        });
+
+    
         formData.append("prompt", prompt);
 
         const response = await fetch(`${BASE_URL}${endPoint}`, {
@@ -86,6 +93,7 @@ async function apiPost_ai(endPoint, data, prompt, skipRedirect = false) {
             },
             body: formData
         });
+        
         return await handleResponse(response, skipRedirect);
     } catch (err) {
         console.error("AI POST request failed:", err);

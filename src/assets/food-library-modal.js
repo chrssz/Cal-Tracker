@@ -10,13 +10,11 @@ export class FoodLibraryModal extends ModalWindow{
         this.foodList = JSON.parse(localStorage.getItem("food-list") || '[]');
         this.total = {calories: 0, fats: 0, carbs: 0, protein: 0}
         this.selected_foods = new Set();
-        this.lock = null;
+    
     }
 
     #get_new_food_item = async(data) => {
-        if(data === null){
-            this.lock.remove();
-            this.lock = null;
+        if(!data){
             return;
         }
         const empty_msg = this.div.querySelector(".modal-window-content");
@@ -26,9 +24,6 @@ export class FoodLibraryModal extends ModalWindow{
         //Callback Func, Data is a single food object
         this.foodList.push(data);
         
-        //Remove lock
-        this.lock.remove();
-        this.lock = null;
 
         localStorage.setItem("food-list", JSON.stringify(this.foodList));
 
@@ -127,13 +122,6 @@ export class FoodLibraryModal extends ModalWindow{
         const toDo = {
             "add food item": () => {
                 const new_prompt = new FoodInputCard(this.#get_new_food_item);
-                const lock = document.createElement("div");
-                lock.classList.add("modal-lock");
-
-                lock.appendChild(new_prompt.div);
-                document.body.appendChild(lock);
-
-                this.lock = lock;
                 
             },
 
