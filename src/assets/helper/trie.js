@@ -15,10 +15,15 @@ export class Trie {
     
     updateTrie(new_foods = []) {
         const new_set = new Set();
-        const current = new_foods.length !== 0 ? new_foods : JSON.parse(localStorage.getItem("food-list") || "[]");
-        if(current.length == 0){
+        const stored = JSON.parse(localStorage.getItem("food-list") || "[]");
+        const current = (Array.isArray(new_foods) && new_foods.length > 0)
+        ? new_foods
+        : stored;
+
+        if (!Array.isArray(current) || current.length === 0) {
             return;
         }
+
         new_foods.forEach(food => {
             new_set.add(food.id);
         });
