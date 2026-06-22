@@ -7,7 +7,7 @@ let syncTimer = null;
 
 async function sync() {
     try {
-        checkTrie(JSON.parse(localStorage.getItem("food-list"))); //Populate trie before sync just in case rate limit is hit.
+        checkTrie(JSON.parse(localStorage.getItem("food-list") || "[]")); //Populate trie before sync just in case rate limit is hit.
         const response = await syncData(); 
         if(!response || response.error) {
             stopSync(); 
@@ -19,7 +19,7 @@ async function sync() {
         localStorage.setItem("meals", JSON.stringify(response.meals));
         localStorage.setItem("food-list", JSON.stringify(response.food_list));
 
-        checkTrie(JSON.parse(localStorage.getItem("food-list")));
+        checkTrie(JSON.parse(localStorage.getItem("food-list") || "[]"));
 
         renderAll();
         updateHistoryUi();

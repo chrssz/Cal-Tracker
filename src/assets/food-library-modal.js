@@ -26,9 +26,9 @@ export class FoodLibraryModal extends ModalWindow{
         //Callback Func, Data is a single food object
         this.foodList.push(data);
         
-
+        const trie = getTrie();
         localStorage.setItem("food-list", JSON.stringify(this.foodList));
-
+        trie.updateTrie(JSON.parse(localStorage.getItem("food-list")));
         const new_panel = new FoodItemPanel(data, {get_selected_food: this.#get_selected_food});
 
         const container = this.div.querySelector(".modal-window-content");

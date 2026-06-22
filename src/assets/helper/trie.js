@@ -13,9 +13,12 @@ export class Trie {
         this.updateTrie(foods);
     }
     
-    updateTrie(new_foods) {
+    updateTrie(new_foods = []) {
         const new_set = new Set();
         const current = new_foods.length !== 0 ? new_foods : JSON.parse(localStorage.getItem("food-list") || "[]");
+        if(current.length == 0){
+            return;
+        }
         new_foods.forEach(food => {
             new_set.add(food.id);
         });
