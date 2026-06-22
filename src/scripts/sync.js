@@ -1,12 +1,13 @@
 import { renderAll} from "./uiRender.js";
 import { updateHistoryUi } from "./food_history.js";
 import { syncData } from "./user_info.js";
+import { checkTrie } from "./trieRef.js";
 const SYNC_INTERVAL = 5 * 60 * 1000;
 let syncTimer = null;
 
 async function sync() {
     try {
-     
+        checkTrie(JSON.parse(localStorage.getItem("food-list"))); //Populate trie before sync just in case rate limit is hit.
         const response = await syncData(); 
         if(!response || response.error) {
             stopSync(); 
@@ -17,6 +18,8 @@ async function sync() {
         localStorage.setItem("consumed", JSON.stringify(response.consumed));
         localStorage.setItem("meals", JSON.stringify(response.meals));
         localStorage.setItem("food-list", JSON.stringify(response.food_list));
+
+        checkTrie(JSON.parse(localStorage.getItem("food-list")));
 
         renderAll();
         updateHistoryUi();

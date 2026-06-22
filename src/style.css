@@ -404,56 +404,57 @@ body {
 #goal-option-buttons button { flex: 1; padding: 10px; }
 
 .added-food-name {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text-primary);
-    flex: 1;
-    min-width: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 
 .added-food-info {
-    font-size: 12px;
-    color: var(--label-color);
+  font-size: 12px;
+  color: var(--label-color);
 }
 
 .food-macros-row {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    margin-top: 2px;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 2px;
 }
 .macro-pill {
-    font-size: 11px;
-    font-weight: 500;
-    padding: 2px 8px;
-    border-radius: 99px;
-    background: var(--section-header-bg);
-    border: 1px solid var(--border);
-    color: var(--text-secondary);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 99px;
+  background: var(--section-header-bg);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
 }
 /*  Food List Item base  */
 .food-list-item {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    border-radius: var(--radius-inner);
-    background: var(--main-bg-color);
-    border: 1px solid var(--border);
-    padding: 14px 16px;
-    cursor: pointer;
-    position: relative;
-    user-select: none;
-    transition: background 0.15s, box-shadow 0.15s, transform 0.1s;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-radius: var(--radius-inner);
+  background: var(--main-bg-color);
+  border: 1px solid var(--border);
+  padding: 14px 16px;
+  cursor: pointer;
+  position: relative;
+  user-select: none;
+  transition: background 0.15s, box-shadow 0.15s, transform 0.1s;
+  width: 100%;
 }
 
 .food-list-item:hover {
-    background: var(--btn-background-hover);
-    box-shadow: var(--shadow-hover);
-    transform: translateY(-1px);
+  background: var(--btn-background-hover);
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-1px);
 }
 
 .food-list-item.selected {
@@ -462,10 +463,10 @@ body {
 }
 
 .food-item-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
 }
 
 
@@ -669,8 +670,8 @@ body.modal-open {
   z-index: 10;
   background-color: var(--main-bg-color);
   box-shadow: var(--shadow-card);
-  overflow-y: auto;    
-
+  overflow: hidden;    
+  
   
   transform: translateX(-50%) translateY(100%); 
   
@@ -682,14 +683,23 @@ body.modal-open {
 .modal-window header {
   position: relative;
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
+  align-items: stretch;
   justify-content: space-between;
-  padding: 25px 20px;
+  padding: 15px 20px;
   background-color: var(--main-bg-color);
   border-bottom: 1px solid var(--border);
   
 }
+.modal-window-header-top {
+  display: flex;
+  align-items: center;
+  
+  justify-content: space-between;
+  padding: 14px 16px 10px;
+  
+}
+
 .modal-window footer .hidden{
   display: none;
 
@@ -729,6 +739,8 @@ body.modal-open {
   padding: 16px;
   flex: 1;
   overflow-y: auto;
+  
+  
 }
 .modal-window .meal-name-input input {
   border: none;
@@ -1384,6 +1396,61 @@ input[type=number] {
   color: var(--text-primary);
 }
 
+.library-search {
+  
+  background: transparent;
+  width: 100%;
+  
+  backdrop-filter: blur(8px);
+  pointer-events: none;
+}
+.modal-search-row {
+  padding: 0 16px 14px;
+}
+
+.search-bar-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--section-header-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-inner);
+  padding: 8px 12px;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.search-bar-wrap:focus-within {
+  border-color: var(--accent);
+  background: var(--main-bg-color);
+}
+
+.search-icon {
+  font-size: 14px;
+  color: var(--label-color);
+  flex-shrink: 0;
+}
+
+.search-bar {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  color: var(--text-primary);
+  width: 100%;
+  font-family: inherit;
+}
+
+.search-bar::placeholder {
+  color: var(--label-color);
+}
+
+.search-results{
+  
+  border-radius: var(--radius-inner);
+  padding: 5px;
+  margin-bottom: 5px;
+  background-color: rgba(138, 138, 231, 0.395);
+}
 /*  Hidden  */
 .hidden { display: none; }
 

@@ -3,6 +3,8 @@ import { FoodItemPanel } from "./food-item-panel";
 import { FoodInputCard } from "./food-input-card";
 import { apiDelete } from "../scripts/api";
 import { addUserFoods, removeUserFood } from "../scripts/user_info";
+import { getTrie } from "../scripts/trieRef";
+
 export class FoodLibraryModal extends ModalWindow{
     constructor(){
         super();
@@ -10,7 +12,7 @@ export class FoodLibraryModal extends ModalWindow{
         this.foodList = JSON.parse(localStorage.getItem("food-list") || '[]');
         this.total = {calories: 0, fats: 0, carbs: 0, protein: 0}
         this.selected_foods = new Set();
-    
+        
     }
 
     #get_new_food_item = async(data) => {
@@ -84,12 +86,25 @@ export class FoodLibraryModal extends ModalWindow{
     getTitle(){
         return "Food Library";
     }
-
+    get_header_extra(){
+        return `
+            <div class="modal-search-row">
+                <div class="search-bar-wrap">
+                    <span class="search-icon"></span>
+                    <input class="search-bar" type="text" placeholder="Search your foods...">
+                </div>
+            </div>
+        `;
+    }
     getContent(){
         return `
+            
             <div class="modal-window-content">
+                <div class="search-results hidden">
+                    
+                </div>
             </div>
-
+            
             <div class="meal-total-macros food-list hidden">
                 <span>Calories: <span id="select-calories">0</span></span>
                 <span> Fats: <span id="select-fats">0</span></span>
@@ -251,6 +266,49 @@ export class FoodLibraryModal extends ModalWindow{
             }
             this.#update_ui_macros();
             await removeUserFood(to_remove);
+        });
+
+        div.querySelector(".search-bar").addEventListener("input", (e) =>{
+            
+            if(this.panels.size === 0){
+                return;
+            }
+
+            const search_query = e.target.value;
+            
+            const trie = getTrie();
+            const results = trie.getPrefix(search_query);
+            const ui_display = div.querySelector(".search-results");
+
+            const search_text = document.createElement("span");
+            search_text.classList.add('search-results-title');
+            search_text.innerHTML = "Search Results";
+
+            ui_display.innerHTML = ''
+            ui_display.classList.add("hidden");
+            if(search_query === ''){
+                const container = div.querySelector('.modal-window-content');
+
+                this.panels.forEach(panel => {
+                    container.appendChild(panel.div);
+                });
+
+                return;
+            } 
+            ui_display.appendChild(search_text);
+            ui_display.classList.remove("hidden");
+            if (results.size == 0){
+                search_text.innerHTML = "No results.";
+                return;
+            }
+            this.panels.forEach(panel => {
+                if(results.has(panel.data.id)){
+                    ui_display.appendChild(panel.div);
+                }
+            });
+            
+
+            console.log(results);
         });
     }
     turn_off(){

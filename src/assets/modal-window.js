@@ -12,11 +12,13 @@ export class ModalWindow{
         
         div.innerHTML = `
             <header>
-              <button id="go-back">&#8592;</button>
-              <span>${this.getTitle()}</span>
-              <button id="options">&#9776;</button>
+                <div class="modal-window-header-top">
+                    <button id="go-back">&#8592;</button>
+                    <span>${this.getTitle()}</span>
+                    <button id="options">&#9776;</button>
+                </div>
+              ${this.get_header_extra()}
             </header>
-            
             
             ${this.getContent()}
            
@@ -27,7 +29,10 @@ export class ModalWindow{
         
         return div;
     }
-   
+    
+    get_header_extra(){
+        return "";
+    }
     getTitle(){
         return "Template Title";
     }
