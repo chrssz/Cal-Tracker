@@ -23,6 +23,8 @@ async function updateHistoryUi() {
         history_container.appendChild(history_panel.get_div_element());
         
     });
+
+    render_scroll_indicators(user_meals.length);
 }
 function removeMealLocalStorage(meal) {
     const user_meals = JSON.parse(localStorage.getItem("meals") || "[]");;
@@ -36,6 +38,46 @@ function removeMealLocalStorage(meal) {
 
     localStorage.setItem("meals", JSON.stringify(new_meals));
 
+}
+function render_scroll_indicators(count) {
+    const container = document.getElementById('today-meals');
+    let dots_wrap = container.querySelector('.scroll-indicators');
+
+    if(dots_wrap) dots_wrap.remove();
+    if(count <= 1) return; // no dots needed for 0 or 1 meal
+
+    dots_wrap = document.createElement('div');
+    dots_wrap.classList.add('scroll-indicators');
+
+    for(let i = 0; i < count; i++) {
+        const dot = document.createElement('div');
+        dot.classList.add('scroll-dot');
+        if(i === 0) dot.classList.add('active');
+        dot.dataset.index = i;
+        dots_wrap.appendChild(dot);
+    }
+
+    container.appendChild(dots_wrap);
+
+    const scroll_el = document.getElementById('today-meal-history');
+
+    const update_active = () => {
+        const index = Math.round(scroll_el.scrollLeft / scroll_el.clientWidth);
+        dots_wrap.querySelectorAll('.scroll-dot').forEach((dot, i) => {
+            dot.classList.toggle('active', i === index);
+        });
+    };
+
+    scroll_el.addEventListener('scroll', () => {
+        requestAnimationFrame(update_active);
+    });
+
+    dots_wrap.querySelectorAll('.scroll-dot').forEach(dot => {
+        dot.addEventListener('click', () => {
+            const index = parseInt(dot.dataset.index);
+            scroll_el.scrollTo({ left: index * scroll_el.clientWidth, behavior: 'smooth' });
+        });
+    });
 }
 class HistoryPanel {
     constructor(meal, mealIndex) {

@@ -325,14 +325,13 @@ body {
   gap: 12px;
   overflow-x: auto;
   overflow-y: hidden;
-  padding-bottom: 6px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
   padding-right: 18px;
-  scroll-snap-type: x proximity;
-  -webkit-overflow-scrolling: touch;
-  
 }
 
-#today-meal-history::-webkit-scrollbar { height: 5px; }
+#today-meal-history::-webkit-scrollbar { display: none; }
+
 #today-meal-history::-webkit-scrollbar-thumb {
   background: var(--border-strong);
   border-radius: 10px;
@@ -351,7 +350,9 @@ body {
 
 /*   History Card   */
 .history-panel {
-  flex: 0 0 220px;
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  
   background: var(--section-header-bg);
   border: 1px solid var(--border);
   border-radius: 14px;
@@ -359,7 +360,27 @@ body {
   transition: box-shadow 0.2s ease;
   scroll-snap-align: start;
 }
+/* pagination dots */
+.scroll-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 12px;
+  padding-right: 18px;
+}
+.scroll-dot {
+  width: 16px;
+  height: 4px;
+  border-radius: 99px;
+  background: var(--border-strong);
+  transition: background 0.25s ease, width 0.25s ease;
+  cursor: pointer;
+}
 
+.scroll-dot.active {
+  background: var(--accent);
+  width: 22px;
+}
 .history-panel:hover { box-shadow: var(--shadow-hover); }
 
 .history-panel-header {
@@ -412,7 +433,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 6px 0;
+  padding: 8px 0;
   border-bottom: 1px solid var(--border);
   gap: 8px;
 }
@@ -441,6 +462,7 @@ body {
   flex-direction: row;
   gap: 6px;
   padding: 8px 12px;
+  margin-bottom: 26px;
   font-size: 11px;
   font-weight: 600;
   color: var(--text-secondary);
@@ -755,7 +777,7 @@ body.modal-open { overflow: hidden; }
 .modal-window footer #cancel,
 .modal-window footer #save {
   opacity: 1;
-  transform: translateY(180%);
+  transform: translateY(160%);
   overflow: hidden;
   transition: opacity 0.2s ease, transform 0.2s ease;
   pointer-events: none;
