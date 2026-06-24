@@ -697,9 +697,7 @@ body {
   pointer-events: none;
 }
 
-/* ════════════════════════════════════
-   Modal Window
-   ════════════════════════════════════ */
+/* Modal Window */
 body.modal-open { overflow: hidden; }
 
 .modal-window {
@@ -757,7 +755,7 @@ body.modal-open { overflow: hidden; }
 .modal-window footer #cancel,
 .modal-window footer #save {
   opacity: 1;
-  transform: translateY(160%);
+  transform: translateY(180%);
   overflow: hidden;
   transition: opacity 0.2s ease, transform 0.2s ease;
   pointer-events: none;
