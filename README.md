@@ -1,10 +1,6 @@
 # Cal Tracker
 # Live App Link: https://nutri.codexr.dev
 A progressive web app for tracking daily calorie and macro intake. Installable on mobile devices without an app store.
-
-## ⚠️ Important
-Screenshots below are outdated. Please visit the live website to see the latest UI. The README will be updated soon.
-
 ---
 ## Features
 
@@ -46,54 +42,47 @@ Open `http://localhost:5173`
 ## ScreenShots
 
 <p>Web App's main page</p>
-<img width="391" height="844" alt="DefaultApp" src="https://github.com/user-attachments/assets/8d95d5c6-4e6f-4954-bb47-8c6d022f8f91" />
+<img width="878" height="1055" alt="nutri-track-main" src="https://github.com/user-attachments/assets/4b616e2c-35de-4941-97c4-870e767ac063" />
 
 
 <p>Settings for changing calorie goals</p>
-<img width="391" height="844" alt="CalorieGoalSettings" src="https://github.com/user-attachments/assets/d9deae3e-070d-4be6-b70b-14e45cb65849" />
+<img width="878" height="1055" alt="nutri-track-options" src="https://github.com/user-attachments/assets/c9c598ff-4d37-414d-9e49-f634729ee77b" />
 
 
-<p>Adding a meal. Options to name a meal. Insert a one time custom food</p>
-<img width="391" height="844" alt="SingleFoodItemInsert" src="https://github.com/user-attachments/assets/a7da1d29-c406-4f7a-9d7f-52dcf402fd84" />
+
+<p>Log a meal, add foods from your food list
+<img width="878" height="1055" alt="nutri-track-add-meal-modal" src="https://github.com/user-attachments/assets/19baf488-7faf-4ff1-b43a-4ca1686b8cff" />
+</p>
 
 
-<p>One time custom food item added, added foods will have a blue panel.</p>
-<img width="391" height="844" alt="SingelFoodItemInserted" src="https://github.com/user-attachments/assets/06c3e8bc-515a-4569-9a8e-f997a360b956" />
+<p>Food List display, add any of these items to the current meal you are building.
+  <img width="878" height="1055" alt="foodlist-modal" src="https://github.com/user-attachments/assets/b4e092f5-02eb-4e37-a5e7-41ad3452c962" />
+</p>
 
+<p>Enter in select mode and select your wanted items!</p>
+<img width="878" height="1055" alt="foodlist-select-mode" src="https://github.com/user-attachments/assets/033d0bdc-967e-484f-a9d6-baf4cdbade01" />
 
-<p>Save your commonly used foods in the food library!</p>
-<img width="391" height="844" alt="FoodLibraryShowCase" src="https://github.com/user-attachments/assets/8b60aa31-7be4-4662-8741-82cd201a13bd" />
+<p>Search for an item you want!</p>
+<img width="878" height="1055" alt="foodlist-search" src="https://github.com/user-attachments/assets/21444aeb-c5bf-4a88-a729-caa840fe126e" />
 
+<p>Save your selection and it will be added to the current meal. Allows options for changing serving type</p>
+<img width="878" height="1055" alt="meal-added-items" src="https://github.com/user-attachments/assets/4b2b2f0b-4155-4045-9c16-ccf0fbf8608b" />
 
-<p>Adding a new food entry into the library</p>
-<img width="391" height="844" alt="FoodLibraryFormFill" src="https://github.com/user-attachments/assets/2866622c-96da-43af-8099-48a51474223b" />
+<p>Save it, and the app tracks it.</p>
+<img width="878" height="1055" alt="new-meal-with-changes" src="https://github.com/user-attachments/assets/6c370cdd-6637-43f1-9641-d9e516ac40e9" />
 
+<p>Adding a item into your food library? Hit the hamburger symbol to go into add new item</p>
+<img width="878" height="1055" alt="add-foodlist-item" src="https://github.com/user-attachments/assets/e49288b8-4c57-4746-9310-4048f777d0c3" />
 
-<p>Added your new entry into the library</p>
-<img width="391" height="844" alt="FoodLibraryFormAdded" src="https://github.com/user-attachments/assets/93928155-067f-470d-a73b-11a9d6ddfbcb" />
+<p>You can save the new item or... if you're unsure, utilize the Ai Analyzer to get the macros</p>
+<img width="878" height="1055" alt="ai-showcase" src="https://github.com/user-attachments/assets/527a1c8a-05aa-4b04-9fd9-46c9ced989f1" />
 
+<p>Choose to upload a existing photo, or take one. Promote accuracy by providing a description</p>
+<img width="878" height="1055" alt="analyze" src="https://github.com/user-attachments/assets/c9ddc487-9863-4357-988d-252598f9c5f9" />
 
-<p>Hold to select a food item to add to the current meal</p>
-<img width="391" height="844" alt="Hold Food Item to Add To meal" src="https://github.com/user-attachments/assets/b0f09eb6-af37-4f3a-9971-123927173991" />
+<p>Ai will anaylze the detected foods and provide every single item in the meal.</p>
+<img width="878" height="1055" alt="analyze success" src="https://github.com/user-attachments/assets/c8df6560-9d3c-4710-9198-8f7f1c6d0083" />
 
+<p>Save the AI Results to your library!</p>
+<img width="878" height="1055" alt="analyzed-food-input-card" src="https://github.com/user-attachments/assets/1368b541-c142-45b1-acb7-044d127abc94" />
 
-<p>Serving size choices! For precise measurers select serving size in grams</p>
-<img width="391" height="844" alt="Serving  Size Choices" src="https://github.com/user-attachments/assets/0d1ccb28-f4e5-447d-b58b-7f759d8da462" />
-
-<p>Selected food added to the meal in </p>
-<img width="391" height="844" alt="NewFoodAddedToFoods" src="https://github.com/user-attachments/assets/3f1dd186-6adb-4ef6-89f9-1ca5c9e16b95" />
-
-<p>Saved meal, with history overview of today's consumed meal</p>
-<img width="391" height="844" alt="SavedLunchWithHistoryShowcase" src="https://github.com/user-attachments/assets/6730868c-1b90-4188-bdb5-f26859e3c147" />
-
-<p>Ai Analyzer</p>
-<img width="1920" height="907" alt="Ai Analyzer" src="https://github.com/user-attachments/assets/47396d61-26d2-4364-8c08-fb22c8e2001a" />
-
-<p>Choose to upload a existing photo, or take one. Encourage accuracy by providing a description</p>
-<img width="1920" height="907" alt="Ai Analyzer Pt2" src="https://github.com/user-attachments/assets/20d2fbb8-eb53-415e-805b-bc9603596442" />
-
-<p>Ai will anaylze the contents</p>
-<img width="1920" height="907" alt="Ai Analyzer Pt3" src="https://github.com/user-attachments/assets/d7dfed1b-aa8b-479e-a0ea-baead97cf3aa" />
-
-<p>AI Results!</p>
-<img width="1920" height="907" alt="Ai Analyzer Pt4" src="https://github.com/user-attachments/assets/12b3f7f4-e910-456c-a4a9-7a600848ca18" />
