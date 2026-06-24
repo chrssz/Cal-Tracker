@@ -308,7 +308,7 @@ export class FoodLibraryModal extends ModalWindow{
             });
             
 
-            console.log(results);
+           
         });
     }
     turn_off(){

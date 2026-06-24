@@ -116,7 +116,7 @@ class HistoryPanel {
     async remove_meal() {
         removeMealLocalStorage(this.meal);
         console.log(this.total);
-        set_Consumed(this.total, false);
+        await set_Consumed(this.total, false);
         
         
         if (this.div != null){this.div.remove()};
