@@ -2,7 +2,7 @@ import { removeUserMeal, removeConsumed } from "./user_info";
 import { renderAll } from "./uiRender";
 import { set_Consumed } from "./progress";
 
-async function updateHistoryUi() {
+function updateHistoryUi() {
     const history_container = document.getElementById("today-meal-history");
     if (!history_container) return;
 
@@ -30,14 +30,13 @@ function removeMealLocalStorage(meal) {
     const user_meals = JSON.parse(localStorage.getItem("meals") || "[]");;
     const new_meals = [];
     
+    
     user_meals.forEach(item => {
         if(item.meal_id !== meal.meal_id){
             new_meals.push(item);
         }
     });
-
     localStorage.setItem("meals", JSON.stringify(new_meals));
-
 }
 function render_scroll_indicators(count) {
     const container = document.getElementById('today-meals');
@@ -157,18 +156,21 @@ class HistoryPanel {
     
     async remove_meal() {
         removeMealLocalStorage(this.meal);
-        console.log(this.total);
+
+        updateHistoryUi();
+        renderAll();
         await set_Consumed(this.total, false);
         
         
         if (this.div != null){this.div.remove()};
-        updateHistoryUi();
-        renderAll();
+        
         try{
             const response = await removeUserMeal(this.meal);
             if(response.error){
                 console.log(`${response.error}`);
             }
+
+            console.log('Removed success');
 
         } catch(err){
             console.log(err);

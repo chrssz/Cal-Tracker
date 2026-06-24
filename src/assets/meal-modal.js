@@ -146,7 +146,7 @@ export class MealModal extends ModalWindow{
             localStorage.setItem("meals", JSON.stringify(user_meals));
 
             updateHistoryUi();
-
+            
             await addUserMeals(meal_object);
             this.turn_off();
         });
