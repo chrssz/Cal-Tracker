@@ -1378,9 +1378,7 @@ input[type=number] { appearance: textfield; }
 
 .ai-result-name { font-size: 14px; font-weight: 600; color: var(--text-primary); }
 
-/* ════════════════════════════════════
-   Search Bar
-   ════════════════════════════════════ */
+/* Search Bar */
 .modal-search-row { padding: 0 16px 14px; }
 
 .search-bar-wrap {
@@ -1392,6 +1390,8 @@ input[type=number] { appearance: textfield; }
   border-radius: var(--radius-inner);
   padding: 9px 13px;
   transition: border-color 0.15s, background 0.15s;
+
+
 }
 
 .search-bar-wrap:focus-within {
@@ -1413,6 +1413,12 @@ input[type=number] { appearance: textfield; }
 
 .search-bar::placeholder { color: var(--label-color); }
 
+.search-results{
+  border-radius: var(--radius-inner);
+  padding: 5px;
+  margin-bottom: 5px;
+  background-color: #4c8eff51;
+}
 /*   Hidden / Utility   */
 .hidden { display: none; }
 
