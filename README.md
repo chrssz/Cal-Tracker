@@ -8,6 +8,7 @@ A progressive web app for tracking daily calorie and macro intake. Installable o
 - **Meal Logging** — create named meals and add food items manually or from your personal food library
 - **Food Library** — save custom foods with macro data; hold to select a saved food and choose a serving size before adding it to a meal
 - **Meal History** — view a log of all meals consumed today with a breakdown of each food item and total macros per meal; remove any meal from history
+- **Ai Capabilities** — snap photos of meals and have AI analyze food macronutrients.
 - **Settings** — update daily calorie and macro goals at any time
 - **PWA** — installable on iOS and Android directly from the browser, no app store required
 ---
