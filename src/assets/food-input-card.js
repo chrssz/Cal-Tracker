@@ -117,7 +117,7 @@ export class FoodInputCard {
 
         this.ai_handler_ref = () =>{
             const analyzer = new AiAnalyzerModal((foods) => {
-                console.log(`Callback from ai analyzer in food-input : ${foods}`);
+                
                 foods.forEach(food => {
                     // populate the input fields with first food
                     
